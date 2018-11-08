@@ -66,7 +66,7 @@ links:
 
 links1:
   - name:         All
-    url:          /blog/
+    url:          /
     type:         all
     external:     false
   - name:         essays
