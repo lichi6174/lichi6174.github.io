@@ -1,0 +1,112 @@
+title: My personal blog - Lichi
+email: lichi6174@163.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta (for
+  Google search results) and in your feed.xml site description.
+permalink: ':title/'
+baseurl: "/blog" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+
+# Author settings
+author: Lichi # add your name
+author-des: Lichi's BLog # add your name
+author-pic: adam-face.jpg
+about-author: My name is Lichi. I’m a full-time adventure travel blogger and photographer who’s been exploring the world for over 2 years.
+
+# Contact links
+email: lichi6174@163.com # Add your Email address
+phone: 13888888888 # Add your Phone number
+website: https://lichi6174.github.io # Add your website, do not add http://
+linkedin: # Add your Linkedin handle
+github: lichi6174 # Add your Github handle
+#twitter: '@artemsheludko_' # Add your Twitter handle
+#facebook: # Add your Facebook handle
+#instagram: # Add your Instagram handle
+#pinterest: # Add your Pinterest handle
+
+# Newsletter
+mailchimp: # Add your MailChimp form identifier.
+
+# Disqus
+discus_identifier: mr-brown # Add your discus identifier
+
+# Tracker
+analytics: # Google Analytics
+
+# Paginate
+paginate: 10
+paginate_path: /page:num/
+
+# Build settings
+markdown: kramdown
+
+plugins:
+  - jekyll-paginate
+  - jekyll-feed
+  - jekyll-sitemap
+
+include: [_pages]
+exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock", "package-lock.json", "assets/css/sass/"]
+
+links:
+  - name:         Home
+    url:          /blog/
+    external:     false
+  - name:         About
+    url:          /blog/about
+    external:     false
+
+
+
+
+gitalk:
+    enable: true
+    owner: lichi6174
+    repo: lichi6174.github.io
+    clientID: 6a7d368a50aba47c2074
+    clientSecret: 21d9d8a3ffba794b0dbda3e2f3276aa9ddd98ec5
+    admin: lichi6174
+
+#添加分类步骤：
+#1：在_config.yml links1及blog_中添加对应内容
+#2：在_includes里面headr.html中添加对应内容
+#3：在根目录blog文件中创建对应内容
+
+
+links1:
+  - name:         All
+    url:          /blog/
+    type:         all
+    external:     false
+  - name:         essays
+    url:          /blog/blog/essays
+    type:         essays
+    external:     false
+  - name:         Linux
+    url:          /blog/blog/linux
+    type:         linux
+    external:     false
+  - name:         MySQL
+    url:          /blog/blog/mysql
+    type:         mysql
+    external:     false
+  - name:         Kubernetes
+    url:          /blog/blog/kubernetes
+    type:         kubernetes
+    external:     false
+  - name:         Python
+    url:          /blog/blog/python
+    type:         python
+    external:     false
+  - name:         Other
+    url:          /blog/blog/other
+    type:         other
+    external:     false
+blog_1:    all
+blog_2:    essays
+blog_3:    linuxos
+blog_4:    mysql
+blog_5:    kubernetes
+blog_6:    python
+blog_7:    other
