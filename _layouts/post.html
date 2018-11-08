@@ -12,8 +12,7 @@ layout: default
         <div class="header-page">
           <h1 class="page-title">{{page.title}}</h1>
           <div class="page-date"><time datetime="{{page.date}}">{{page.date | date: '%Y, %b %d'}}</time>
-		          <!-- <span id="busuanzi_container_page_pv"> | 访问量：<span id="busuanzi_value_page_pv"></span> 次</span> -->
-              <span id="busuanzi_container_page_pv"> | 本文阅读量：<span id="busuanzi_value_page_pv"></span>次</span>
+		          <span id="busuanzi_container_page_pv"> | 本文阅读量：<span id="busuanzi_value_page_pv"></span>次</span>
 		  </div>
         </div>
         {{page.content | markdownify}}
@@ -27,8 +26,6 @@ layout: default
 
           <!--//添加评论系统-->
           <div id="gitmentContainer"></div>
-            <!-- <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"> -->
-            <!-- <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
             <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
             <script src="https://jjeejj.github.io/js/gitment.js"></script>
             <script>
