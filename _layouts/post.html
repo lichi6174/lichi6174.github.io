@@ -25,26 +25,26 @@ layout: default
             {% endfor %}
           </div><!-- End Tags -->
 
-      <!--//添加评论系统-->
-      <div id="gitmentContainer"></div>
-      <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
-      <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
-      <script>
-      var gitment = new Gitment({
-      owner: 'lichi6174',
-      repo: 'lichi6174.github.io',
-      oauth: {
-        client_id: '6a7d368a50aba47c2074',
-        client_secret: '21d9d8a3ffba794b0dbda3e2f3276aa9ddd98ec5',
-      },
-      });
-      gitment.render('gitmentContainer');
-      </script>
+          <!--//添加评论系统-->
+          <div id="gitmentContainer"></div>
+            <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+            <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+            <script>
+              var gitment = new Gitment({
+              owner: 'lichi6174',
+              repo: 'lichi6174.github.io',
+              oauth: {
+                client_id: '6a7d368a50aba47c2074',
+                client_secret: '21d9d8a3ffba794b0dbda3e2f3276aa9ddd98ec5',
+              },
+              });
+              gitment.render('gitmentContainer');
+            </script>
 
-        <!-- 打赏   -->
-		    {% include new-old.html %}
+          <!-- 打赏   -->
+		      {% include new-old.html %}
+
         </div>
-		
 		
         {% include author-box.html %}
         {% include recent-post.html %}
