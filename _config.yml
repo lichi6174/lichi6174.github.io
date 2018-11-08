@@ -58,17 +58,6 @@ links:
     url:          /blog/about
     external:     false
 
-
-
-
-gitalk:
-    enable: true
-    owner: lichi6174
-    repo: lichi6174.github.io
-    clientID: 6a7d368a50aba47c2074
-    clientSecret: 21d9d8a3ffba794b0dbda3e2f3276aa9ddd98ec5
-    admin: lichi6174
-
 #添加分类步骤：
 #1：在_config.yml links1及blog_中添加对应内容
 #2：在_includes里面headr.html中添加对应内容
