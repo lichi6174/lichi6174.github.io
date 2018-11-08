@@ -5,7 +5,8 @@ description: > # this means to ignore newlines until "baseurl:"
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 permalink: ':title/'
-baseurl: "/blog" # the subpath of your site, e.g. /blog
+# baseurl: "/blog" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
 # Author settings
@@ -80,27 +81,27 @@ links1:
     type:         all
     external:     false
   - name:         essays
-    url:          /blog/blog/essays
+    url:          /blog/essays
     type:         essays
     external:     false
   - name:         Linux
-    url:          /blog/blog/linux
+    url:          /blog/linux
     type:         linux
     external:     false
   - name:         MySQL
-    url:          /blog/blog/mysql
+    url:          /blog/mysql
     type:         mysql
     external:     false
   - name:         Kubernetes
-    url:          /blog/blog/kubernetes
+    url:          /blog/kubernetes
     type:         kubernetes
     external:     false
   - name:         Python
-    url:          /blog/blog/python
+    url:          /blog/python
     type:         python
     external:     false
   - name:         Other
-    url:          /blog/blog/other
+    url:          /blog/other
     type:         other
     external:     false
 blog_1:    all
