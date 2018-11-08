@@ -52,10 +52,10 @@ exclude: ["node_modules", "gulpfile.js", "package.json", "yarn.lock", "package-l
 
 links:
   - name:         Home
-    url:          /blog/
+    url:          /
     external:     false
   - name:         About
-    url:          /blog/about
+    url:          /about
     external:     false
 
 #添加分类步骤：
