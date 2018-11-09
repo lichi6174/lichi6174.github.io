@@ -42,6 +42,9 @@ paginate_path: /page:num/
 # Build settings
 markdown: kramdown
 
+kramdown:
+  input: GFM
+
 plugins:
   - jekyll-paginate
   - jekyll-feed
