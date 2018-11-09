@@ -74,6 +74,7 @@ Environment="NO_PROXY=192.168.2.0/24,127.0.0.0/8"
 ExecStart=/usr/bin/dockerd
 ExecReload=/bin/kill -s HUP $MAINPID
 ```
+
 2. 启动服务
 
 ```bash
@@ -264,8 +265,7 @@ daemonset.extensions/kube-flannel-ds-s390x created
 ```
 
 - 部署flannel之后，检查其运行状态以及镜像信息
-
-==** (注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题) **==
+>(注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题)
 
 ```bash
 $kubectl get pods -n kube-system
