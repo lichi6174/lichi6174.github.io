@@ -66,8 +66,8 @@ yum install docker-ce kubelet kubeadm kubectl
 ## 配置所有节点的docker启动服务
 
 - 调整配置，新增两个Environment变量
-1. 1
-2. 2
+1.
+
 ```bash
 #vim /usr/lib/systemd/system/docker.service
 Environment="HTTPS_PROXY=http://www.ik8s.io:10080"
