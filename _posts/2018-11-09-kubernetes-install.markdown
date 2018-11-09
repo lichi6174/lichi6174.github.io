@@ -12,7 +12,7 @@ kubernetes: true
 # kubeadm安装kubernetes步骤说明：
 
 ## 第一步
-### 准备系统环境
+## 准备系统环境
 
 - Repo仓库准备
 
@@ -49,7 +49,7 @@ kubernetes: true
 2. 外网访问正常
 
 ## 第二步
-### 开始在所有服务器上安装相关软件包
+## 开始在所有服务器上安装相关软件包
 
 - master节点
 
@@ -63,7 +63,7 @@ yum install docker-ce kubelet kubeadm kubectl
 ```
 
 ## 第三步
-### 配置所有节点的docker启动服务
+## 配置所有节点的docker启动服务
 
 1. 调整配置，新增两个Environment变量
 
@@ -111,7 +111,7 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service
 ```
 
 ## 第四步
-### 开始使用kubeadm部署kubernetes master节点
+## 开始使用kubeadm部署kubernetes master节点
 
 - kubeadm初始化
 
