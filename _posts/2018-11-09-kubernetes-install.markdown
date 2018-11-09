@@ -65,8 +65,9 @@ yum install docker-ce kubelet kubeadm kubectl
 ## 第三步
 ## 配置所有节点的docker启动服务
 
-1. 调整配置，新增两个Environment变量
-
+- 调整配置，新增两个Environment变量
+1. 1
+2. 2
 ```bash
 #vim /usr/lib/systemd/system/docker.service
 Environment="HTTPS_PROXY=http://www.ik8s.io:10080"
@@ -75,7 +76,7 @@ ExecStart=/usr/bin/dockerd
 ExecReload=/bin/kill -s HUP $MAINPID
 ```
 
-2. 启动服务
+- 启动服务
 
 ```bash
 $systemctl enable docker
@@ -84,7 +85,7 @@ $systemctl start docker
 $docker info
 ```
 
-3. 优化内核iptables策略
+- 优化内核iptables策略
 
 ```bash
 $vim /etc/sysctl.conf
@@ -92,7 +93,7 @@ net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 ```
 
-4. 查看kubelet安装后文件信息
+- 查看kubelet安装后文件信息
 
 ```bash
 $rpm -ql kubelet
@@ -102,7 +103,7 @@ $rpm -ql kubelet
 /usr/bin/kubelet
 ```
 
-5. 设置kubelet开启自启动（但是现在不需要去启动它）
+- 设置kubelet开启自启动（但是现在不需要去启动它）
 
 ```bash
 $systemctl enable kubelet
