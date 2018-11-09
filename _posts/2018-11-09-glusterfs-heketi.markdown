@@ -32,13 +32,13 @@ k8s-node02 | 192.168.2.242 | 192.168.2.242 | /sdb | 500G
 
 
 ## 部署步骤
-1. 安装glusterfs依赖组件
+### 安装glusterfs依赖组件
 
 ```bash
 $yum install -y glusterfs glusterfs-server glusterfs-fuse glusterfs-rdma glusterfs-geo-replication glusterfs-devel
 ```
 
-2. 加载内核模块
+### 加载内核模块
 
 ```bash
 modprobe dm_snapshot
@@ -46,7 +46,7 @@ modprobe dm_thin_pool
 modprobe dm_mirror
 ```
 
-3. 确认模块已加载
+### 确认模块已加载
 
 ```bash
 $lsmod |egrep "dm_snapshot|dm_mirror|dm_thin_pool"
