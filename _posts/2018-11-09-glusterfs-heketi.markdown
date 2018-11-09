@@ -566,7 +566,8 @@ $kubectl exec -i heketi-86f98754c-xb55c -- heketi-cli -s http://localhost:8080 -
 Clusters:
 Id:338132d846622007777716cece92d64c [file][block]
 ```
-- ==方法二：在本地安装heketi-cli工具，它来查看信息==
+
+- *方法二：在本地安装heketi-cli工具，它来查看信息*{: style="color: red"}
 
 ```
 获取工具路径：https://github.com/heketi/heketi/releases
@@ -610,7 +611,7 @@ $./gk-deploy -g --abort
 
 2. 再将节点的目录/var/lib/glusterd清空
 
-```
+```bash
 rm -rf /var/lib/glusterd
 ```
 
