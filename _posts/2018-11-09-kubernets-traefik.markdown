@@ -282,7 +282,7 @@ spec:
 
 - haproxy.cfg.j2
 
-```bash
+```
 global
         log /dev/log    local0
         log /dev/log    local1 notice
