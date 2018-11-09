@@ -282,7 +282,6 @@ spec:
 
 - haproxy.cfg.j2
 
-```txt
 > global
 >         log /dev/log    local0
 >         log /dev/log    local1 notice
@@ -338,7 +337,6 @@ spec:
 > {% endfor %}
 > {% endif %}
 > 
-```
 
 *ansible-playbook应用修改后模板配置，并重启haproxy服务*{: style="color: red"}
 
