@@ -267,7 +267,7 @@ daemonset.extensions/kube-flannel-ds-s390x created
 
 - 部署flannel之后，检查其运行状态以及镜像信息
 
-== (注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题) ==
+*注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题*{: style="color: red"}
 
 ```bash
 $kubectl get pods -n kube-system
