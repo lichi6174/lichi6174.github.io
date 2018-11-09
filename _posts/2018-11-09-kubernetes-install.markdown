@@ -12,7 +12,7 @@ kubernetes: true
 # kubeadm安装kubernetes步骤说明：
 
 ## 第一步
-## 准备系统环境
+### 准备系统环境
 
 - Repo仓库准备
 
@@ -40,7 +40,6 @@ kubernetes: true
 192.168.2.240 k8s-master01 k8s-master01.lichi.com
 192.168.2.241 k8s-node01 k8s-node01.lichi.com
 192.168.2.242 k8s-node02 k8s-node02.lichi.com
-
 ```
 
 - 验证服务器网络情况
@@ -49,13 +48,14 @@ kubernetes: true
 2. 外网访问正常
 
 ## 第二步 
-## 开始在所有服务器上安装相关软件包   
+### 开始在所有服务器上安装相关软件包   
 
 - master节点
 
 ```bash
 yum install docker-ce kubelet kubeadm kubectl
 ```
+
 - node节点
 
 ```bash
@@ -63,7 +63,7 @@ yum install docker-ce kubelet kubeadm kubectl
 ```
 
 ## 第三步
-## 配置所有节点的docker启动服务
+### 配置所有节点的docker启动服务
 
 - 调整配置，新增两个Environment变量
 
@@ -111,9 +111,9 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service
 ```
 
 ## 第四步
-## 开始使用kubeadm部署kubernetes master节点
+### 开始使用kubeadm部署kubernetes master节点
 
-- kubeadm初始化
+#### kubeadm初始化
 
 - 忽略初始化时的swap报错设置
 
@@ -248,7 +248,7 @@ k8s-master01   NotReady   master    23m       v1.11.2
 ```
 
 ## 第五步
-## 部署flannel
+### 部署flannel
 
 - [flannel官方GitHub地址](https://github.com/coreos/flannel)
 
@@ -304,7 +304,7 @@ kube-system   Active    39m
 ```
 
 ## 第六步
-## 开始使用kubeadm部署kubernetes node节点
+### 开始使用kubeadm部署kubernetes node节点
 
 - 参考master节点配置，修改相关配置文件
 
@@ -421,7 +421,7 @@ k8s.gcr.io/pause              3.1                 da86e6ba6ca1        7 months a
 ```
 
 ## 第七步
-## 验证kubeadm搭建的kubernetes集群
+### 验证kubeadm搭建的kubernetes集群
 
 - kubectl命令自动补全功能开启
 
@@ -430,7 +430,7 @@ echo "source <(kubectl completion zsh)" >> ~/.zshrc
 echo "source <(kubectl completion bash)" >> ~/.bashrc
 ```
 
-- 常用命令
+- 常用命令集合
 
 ```bash
 $kubectl run nginx-deploy --image=nginx:1.14-alpine --port=80 --replicas=1
