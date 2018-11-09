@@ -99,11 +99,13 @@ $cd  ~/mainfests/gluster-kubernetes/deploy
 
 $cp topology.json.sample topology.json
 ```
+
 7. 修改topology.json文件中的存储节点IP地址和设备名称，如下示:
 
 *注意hostnames/manage下对应的节点名称，应该与kubect get nodes中的NAME一致*{: style="color: red"}
 
 - topology.json
+
 ```json
 {
   "clusters": [
@@ -162,6 +164,7 @@ $cp topology.json.sample topology.json
   ]
 }
 ```
+
 8. 如果要在master节点部署glusterfs存储节点的话需要修改相关的yaml文件，允许容忍污点,修改后如下:
 
 ```bash
