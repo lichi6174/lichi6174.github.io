@@ -66,7 +66,6 @@ yum install docker-ce kubelet kubeadm kubectl
 ## 配置所有节点的docker启动服务
 
 - 调整配置，新增两个Environment变量
-1.
 
 ```bash
 #vim /usr/lib/systemd/system/docker.service
@@ -116,21 +115,21 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service
 
 - kubeadm初始化
 
-1. 忽略初始化时的swap报错设置
+- 忽略初始化时的swap报错设置
 
 ```bash
 $vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 ```
 
-2. 初始化
+- 初始化
 
 ```bash
 $kubeadm init --kubernetes-version=v1.11.2 --pod-network-cidr=10.244.0.0/16 --service-cidr=10.96.0.0/12 --ignore-preflight-errors=Swap
 
 ```
 
-3. 初始化完成后的信息：
+- 初始化完成后的信息：
 
 ```bash
 [init] using Kubernetes version: v1.11.2
@@ -211,7 +210,7 @@ as root:
 ```
 
 
-4. 查看初始化k8s master节点拉取到的容器镜像
+- 查看初始化k8s master节点拉取到的容器镜像
 
 ```bash
 $docker images
@@ -226,7 +225,7 @@ k8s.gcr.io/pause                           3.1                 da86e6ba6ca1     
 
 ```
 
-5. 根据初始化信息提示，操作余下步骤
+- 根据初始化信息提示，操作余下步骤
 
 ```bash
 $mkdir -p $HOME/.kube
@@ -234,7 +233,7 @@ $sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
 
-6. 使用kubectl查看master节点中各个组件的状态
+- 使用kubectl查看master节点中各个组件的状态
 
 ```bash
 $kubectl get cs
@@ -248,7 +247,8 @@ NAME           STATUS     ROLES     AGE       VERSION
 k8s-master01   NotReady   master    23m       v1.11.2
 ```
 
-7. 部署flannel
+## 第五步
+## 部署flannel
 
 - [flannel官方GitHub地址](https://github.com/coreos/flannel)
 
@@ -266,7 +266,8 @@ daemonset.extensions/kube-flannel-ds-s390x created
 ```
 
 - 部署flannel之后，检查其运行状态以及镜像信息
-> (注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题)
+
+** (注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题) **
 
 ```bash
 $kubectl get pods -n kube-system
@@ -283,9 +284,7 @@ kube-scheduler-k8s-master01            1/1       Running             0          
 $kubectl get nodes
 NAME           STATUS    ROLES     AGE       VERSION
 k8s-master01   Ready     master    36m       v1.11.2
-```
 
-```bash
 $docker images
 REPOSITORY                                 TAG                 IMAGE ID            CREATED             SIZE
 k8s.gcr.io/kube-apiserver-amd64            v1.11.2             821507941e9c        6 days ago          187MB
@@ -296,9 +295,7 @@ k8s.gcr.io/coredns                         1.1.3               b3b94275d97c     
 k8s.gcr.io/etcd-amd64                      3.2.18              b8df3b177be2        4 months ago        219MB
 quay.io/coreos/flannel                     v0.10.0-amd64       f0fad859c909        6 months ago        44.6MB
 k8s.gcr.io/pause                           3.1                 da86e6ba6ca1        7 months ago        742kB
-```
 
-```bash
 $kubectl get ns
 NAME          STATUS    AGE
 default       Active    39m
@@ -306,10 +303,10 @@ kube-public   Active    39m
 kube-system   Active    39m
 ```
 
-## 第五步
+## 第六步
 ## 开始使用kubeadm部署kubernetes node节点
 
-1. 参考master节点配置，修改相关配置文件
+- 参考master节点配置，修改相关配置文件
 
 ```bash
 $vim /etc/sysconfig/kubelet
@@ -322,7 +319,7 @@ ExecStart=/usr/bin/dockerd
 ExecReload=/bin/kill -s HUP $MAINPID
 ```
 
-2. 或者直接scp master节点的配置到node节点
+- 或者直接scp master节点的配置到node节点
 
 ```bash
 $scp /etc/sysconfig/kubelet k8s-node01:/etc/sysconfig/
@@ -331,41 +328,41 @@ $scp /usr/lib/systemd/system/docker.service k8s-node01:/usr/lib/systemd/system/
 $scp /usr/lib/systemd/system/docker.service k8s-node02:/usr/lib/systemd/system/
 ```
 
-3. 保证node节点的kubelet，docker自启动
+- 保证node节点的kubelet，docker自启动
 
 ```bash
 $systemctl enable kubelet
 $systemctl enable docker
 ```
 
-4. 启动node节点的docker服务
+- 启动node节点的docker服务
 
 ```bash
 $systemctl start docker
 
 ```
 
-5. 查看docker状态信息
+- 查看docker状态信息
 
 ```bash
 $docker info
 ```
 
-6. node节点加入kubernetes集群
+- node节点加入kubernetes集群
 
 ```
 $kubeadm join 192.168.2.240:6443 --token va1zo5.x017u25cly7ffivc --discovery-token-ca-cert-hash sha256:867118e705a8afa22f5f73d73ff3a95b0f6d555a444f32f1ad92b3ada5b45589 --ignore-preflight-errors=Swap
 
 ```
 
-7. node节点加入集群信息
+- node节点加入集群信息
 
 ```
 [preflight] running pre-flight checks
 	[WARNING RequiredIPVSKernelModulesAvailable]: the IPVS proxier will not be used, because the following required kernel modules are not loaded: [ip_vs_sh ip_vs ip_vs_rr ip_vs_wrr] or no builtin kernel ipvs support: map[ip_vs_wrr:{} ip_vs_sh:{} nf_conntrack_ipv4:{} ip_vs:{} ip_vs_rr:{}]
 you can solve this problem with following methods:
  1. Run 'modprobe -- ' to load missing kernel modules;
-2. Provide the missing builtin kernel ipvs support
+ 2. Provide the missing builtin kernel ipvs support
 
 	[WARNING Swap]: running with swap on is not supported. Please disable swap
 I0814 23:36:40.647760    3714 kernel_validator.go:81] Validating kernel version
@@ -391,7 +388,7 @@ This node has joined the cluster:
 Run 'kubectl get nodes' on the master to see this node join the cluster.
 ```
 
-8. 检查node节点运行状态以及镜像拉取情况
+- 检查node节点运行状态以及镜像拉取情况
 
 ```
 $kubectl get node
@@ -399,7 +396,6 @@ sNAME           STATUS    ROLES     AGE       VERSION
 k8s-master01   Ready     master    1h        v1.11.2
 k8s-node01     Ready     <none>    3m        v1.11.2
 k8s-node02     Ready     <none>    2m        v1.11.2
-
 
 $kubectl get pod -n kube-system -o wide
 NAME                                   READY     STATUS              RESTARTS   AGE       IP              NODE           NOMINATED NODE
@@ -416,7 +412,6 @@ kube-proxy-h4w8x                       1/1       Running             0          
 kube-proxy-qkhrb                       1/1       Running             0          5m        192.168.2.242   k8s-node02     <none>
 kube-scheduler-k8s-master01            1/1       Running             0          1h        192.168.2.240   k8s-master01   <none>
 
-
 $docker images
 REPOSITORY                    TAG                 IMAGE ID            CREATED             SIZE
 k8s.gcr.io/kube-proxy-amd64   v1.11.2             46a3cd725628        6 days ago          97.8MB
@@ -425,7 +420,7 @@ k8s.gcr.io/pause              3.1                 da86e6ba6ca1        7 months a
 
 ```
 
-## 第六步
+## 第七步
 ## 验证kubeadm搭建的kubernetes集群
 
 - kubectl命令自动补全功能开启
