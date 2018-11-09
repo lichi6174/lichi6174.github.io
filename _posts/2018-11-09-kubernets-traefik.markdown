@@ -337,6 +337,7 @@ listen ingress-node
         server {{ host }} {{ host }}:23443 check inter 2000 fall 2 rise 2 weight 1
 {% endfor %}
 {% endif %}
+
 ```
 
 *ansible-playbook应用修改后模板配置，并重启haproxy服务*{: style="color: red"}
