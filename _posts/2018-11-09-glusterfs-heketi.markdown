@@ -61,7 +61,7 @@ dm_log                 18411  2 dm_region_hash,dm_mirror
 dm_mod                123941  14 dm_log,dm_mirror,dm_bufio,dm_thin_pool,dm_snapshot
 ```
 
-4. 获取gluster-kubernetes源码文件
+### 获取gluster-kubernetes源码文件
 
 ```bash
 $cd  ~/mainfests/
@@ -69,7 +69,7 @@ $git clone https://github.com/gluster/gluster-kubernetes.git
 
 ```
 
-5. 用于3个glusterfs节点的存储的磁盘空间分区和格式化
+### 用于3个glusterfs节点的存储的磁盘空间分区和格式化
 
 *官网说每个用于glusterfs存储空间的磁盘节点都需要分区和格式化实际上，经过反复测试，实际上不需要这步操作，可以忽略这一步*{: style="color: red"}
 
@@ -84,7 +84,7 @@ $dd if=/dev/zero of=/dev/sdb bs=1k count=1
 blockdev --rereadpt /dev/sdb
 ```
 
-6. 准备配置文件
+### 准备配置文件
 
 ```bash
 $cat /etc/hosts
@@ -100,7 +100,7 @@ $cd  ~/mainfests/gluster-kubernetes/deploy
 $cp topology.json.sample topology.json
 ```
 
-7. 修改topology.json文件中的存储节点IP地址和设备名称，如下示:
+### 修改topology.json文件中的存储节点IP地址和设备名称，如下示:
 
 *注意hostnames/manage下对应的节点名称，应该与kubect get nodes中的NAME一致*{: style="color: red"}
 
@@ -165,7 +165,7 @@ $cp topology.json.sample topology.json
 }
 ```
 
-8. 如果要在master节点部署glusterfs存储节点的话需要修改相关的yaml文件，允许容忍污点,修改后如下:
+### 如果要在master节点部署glusterfs存储节点的话需要修改相关的yaml文件，允许容忍污点,修改后如下:
 
 ```bash
 $cat glusterfs-daemonset.yaml
@@ -292,7 +292,7 @@ spec:
           path: "/usr/lib/modules"
 ```
 
-9. 如果想暴露heketi的服务到节点的话记得启用type: NodePort，截取部分内如如下
+### 如果想暴露heketi的服务到节点的话记得启用type: NodePort，截取部分内如如下
 
 ```bash
 $cat heketi-deployment.yaml
@@ -318,7 +318,7 @@ spec:
 
 ```
 
-10. 执行部署命令
+### 执行部署命令
 
 ```bash
 $./gk-deploy -g -n default -c kubectl -v
@@ -486,7 +486,7 @@ parameters:
 Deployment complete!
 ```
 
-11. 查看节点信息
+### 查看节点信息
 
 - *方法一：在heketi的pod容器内查看信息*{: style="color: red"}
 
@@ -580,7 +580,7 @@ Clusters:
 Id:cf056a60eef3a878f72b4a9da7682dc3 [file][block]
 ```
 
-12. 查看相关资源情况
+### 查看相关资源情况
 
 ```bash
 $kubectl get all -n default|grep -E "glusterfs|heketi|NAME"
@@ -607,19 +607,19 @@ replicaset.apps/heketi-86f98754c        1         1         1         30m
 
 ## 重新部署步骤
 
-1. 删除pod,svc等；
+### 删除pod,svc等；
 
 ```bash
 $./gk-deploy -g --abort
 ```
 
-2. 再将节点的目录/var/lib/glusterd清空
+### 再将节点的目录/var/lib/glusterd清空
 
 ```bash
 rm -rf /var/lib/glusterd
 ```
 
-3. 删除磁盘的vg和pv
+### 删除磁盘的vg和pv
 
 ```bash
 $dmsetup ls
@@ -643,7 +643,7 @@ $dmsetup remove vg_3117b9de40d6d6e4fe4a6e591a9cada6-tp_6df170a861d466829fc248937
 $dmsetup remove vg_3117b9de40d6d6e4fe4a6e591a9cada6-tp_6df170a861d466829fc248937721b75c_tmeta
 ```
 
-4. 重新执行
+### 重新执行
 
 ```bash
 $./gk-deploy -g -n default -c kubectl -v
@@ -652,7 +652,7 @@ $./gk-deploy -g -n default -c kubectl -v
 
 ## 验证glusterfs和heketi
 
-1. 常用的方法是设置一个StorageClass，让Kubernetes为提交的PersistentVolumeClaim自动配置存储
+### 常用的方法是设置一个StorageClass，让Kubernetes为提交的PersistentVolumeClaim自动配置存储
 
 > 回收策略
 由 storage class 动态创建的 Persistent Volume 会在的 reclaimPolicy 字段中指定回收策略，可以是 Delete 或者 Retain。如果 StorageClass 对象被创建时没有指定 reclaimPolicy ，它将默认为 Delete。
@@ -678,7 +678,7 @@ storageclass.storage.k8s.io/glusterfs-storage created
 ```
 
 
-2. 创建pvc
+### 创建pvc
 
 - heketi-pvc.yaml
 
@@ -704,7 +704,7 @@ $kubectl create -f heketi-pvc.yaml
 persistentvolumeclaim/glusterfs-claim created
 ```
 
-3. 查看storageclasses,pvc,pv
+### 查看storageclasses,pvc,pv
 
 ```bash
 $kubectl get storageclasses,pvc,pv
@@ -728,7 +728,7 @@ persistentvolume/pv005                                      10Gi       RWO,RWX  
 persistentvolume/pvc-11c9fb90-af1a-11e8-ac01-0050569c01a4   5Gi        RWX            Delete           Bound     default/glusterfs-claim     glusterfs-storage             11m
 ```
 
-4. 通过nginx验证存储使用
+### 通过nginx验证存储使用
 
 - 创建nginx容器 heketi-test.yaml
 
