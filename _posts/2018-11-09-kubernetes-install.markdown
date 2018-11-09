@@ -48,8 +48,8 @@ kubernetes: true
 1. 内网访问正常
 2. 外网访问正常
 
-## 第二步
-## 开始在所有服务器上安装相关软件包
+## 第二步 
+## 开始在所有服务器上安装相关软件包   
 
 - master节点
 
@@ -265,7 +265,7 @@ daemonset.extensions/kube-flannel-ds-s390x created
 ```
 
 - 部署flannel之后，检查其运行状态以及镜像信息
->(注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题)
+> (注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题)
 
 ```bash
 $kubectl get pods -n kube-system
@@ -306,7 +306,7 @@ kube-system   Active    39m
 ```
 
 ## 第五步
-### 开始使用kubeadm部署kubernetes node节点
+## 开始使用kubeadm部署kubernetes node节点
 
 1. 参考master节点配置，修改相关配置文件
 
@@ -314,7 +314,7 @@ kube-system   Active    39m
 $vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 
-#vim /usr/lib/systemd/system/docker.service
+$vim /usr/lib/systemd/system/docker.service
 Environment="HTTPS_PROXY=http://www.ik8s.io:10080"
 Environment="NO_PROXY=192.168.2.0/24,127.0.0.0/8"
 ExecStart=/usr/bin/dockerd
@@ -425,7 +425,7 @@ k8s.gcr.io/pause              3.1                 da86e6ba6ca1        7 months a
 ```
 
 ## 第六步
-### 验证kubeadm搭建的kubernetes集群
+## 验证kubeadm搭建的kubernetes集群
 
 - kubectl命令自动补全功能开启
 
