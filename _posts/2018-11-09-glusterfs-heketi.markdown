@@ -69,14 +69,15 @@ $git clone https://github.com/gluster/gluster-kubernetes.git
 
 ```
 
-5. 用于3个glusterfs节点的存储的磁盘空间分区和格式化 
-*==官网说每个用于glusterfs存储空间的磁盘节点都需要分区和格式化实际上，经过反复测试，实际上不需要这步操作，可以忽略这一步*{: style="color: red"}
+5. 用于3个glusterfs节点的存储的磁盘空间分区和格式化
+
+*官网说每个用于glusterfs存储空间的磁盘节点都需要分区和格式化实际上，经过反复测试，实际上不需要这步操作，可以忽略这一步*{: style="color: red"}
 
 ```bash
 $mkfs.xfs /dev/sdb
 ```
 
-*==磁盘添加报错，需要如下操作（这一步在重新部署的时候用得上）*{: style="color: red"}
+*磁盘添加报错，需要如下操作（这一步在重新部署的时候用得上）*{: style="color: red"}
 
 ```
 $dd if=/dev/zero of=/dev/sdb bs=1k count=1
