@@ -22,13 +22,13 @@ kubernetes: true
 
 - 设置时间同步
 1. crontab
-```
+```bash
 */30 * * * * /usr/sbin/ntpdate -u ntp1.aliyun.com && hwclock -w --systohc >/dev/null 2>&1
 ```
 
 - 设置host绑定
 1. cat /etc/hosts
-```
+```bash
 192.168.2.240 k8s-master01 k8s-master01.lichi.com
 192.168.2.241 k8s-node01 k8s-node01.lichi.com
 192.168.2.242 k8s-node02 k8s-node02.lichi.com
@@ -41,17 +41,17 @@ kubernetes: true
 ## 第二步
 ### 开始在所有服务器上安装相关软件包
 - master节点
-```
+```bash
 yum install docker-ce kubelet kubeadm kubectl
 ```
 - node节点
-```
+```bash
 yum install docker-ce kubelet kubeadm kubectl
 ```
 ## 第三步
 ### 配置所有节点的docker启动服务
 1. 调整配置，新增两个Environment变量
-```
+```bash
 #vim /usr/lib/systemd/system/docker.service
 Environment="HTTPS_PROXY=http://www.ik8s.io:10080"
 Environment="NO_PROXY=192.168.2.0/24,127.0.0.0/8"
@@ -60,7 +60,7 @@ ExecReload=/bin/kill -s HUP $MAINPID
 ```
 2. 启动服务
 
-```
+```bash
 $systemctl enable docker
 $systemctl daemon-reload
 $systemctl start docker
@@ -69,7 +69,7 @@ $docker info
 
 3. 优化内核iptables策略
 
-```
+```bash
 $vim /etc/sysctl.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
@@ -77,7 +77,7 @@ net.bridge.bridge-nf-call-iptables = 1
 
 4. 查看kubelet安装后文件信息
 
-```
+```bash
 $rpm -ql kubelet
 /etc/kubernetes/manifests
 /etc/sysconfig/kubelet
@@ -87,7 +87,7 @@ $rpm -ql kubelet
 
 5. 设置kubelet开启自启动（但是现在不需要去启动它）
 
-```
+```bash
 $systemctl enable kubelet
 Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service to /etc/systemd/system/kubelet.service.
 
