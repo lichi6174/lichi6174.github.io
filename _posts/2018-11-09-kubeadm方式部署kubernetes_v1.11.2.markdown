@@ -44,6 +44,7 @@ kubernetes: true
 ```
 
 - 验证服务器网络情况
+
 1. 内网访问正常
 2. 外网访问正常
 
@@ -112,12 +113,14 @@ Created symlink from /etc/systemd/system/multi-user.target.wants/kubelet.service
 ### 开始使用kubeadm部署kubernetes master节点
 
 - kubeadm初始化
+
 1. 忽略初始化时的swap报错设置
 
 ```bash
 $vim /etc/sysconfig/kubelet
 KUBELET_EXTRA_ARGS="--fail-swap-on=false"
 ```
+
 2. 初始化
 
 ```bash
@@ -220,6 +223,7 @@ k8s.gcr.io/etcd-amd64                      3.2.18              b8df3b177be2     
 k8s.gcr.io/pause                           3.1                 da86e6ba6ca1        7 months ago        742kB
 
 ```
+
 5. 根据初始化信息提示，操作余下步骤
 
 ```bash
@@ -227,6 +231,7 @@ $mkdir -p $HOME/.kube
 $sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $sudo chown $(id -u):$(id -g) $HOME/.kube/config
 ```
+
 6. 使用kubectl查看master节点中各个组件的状态
 
 ```bash
@@ -257,9 +262,9 @@ daemonset.extensions/kube-flannel-ds-arm created
 daemonset.extensions/kube-flannel-ds-ppc64le created
 daemonset.extensions/kube-flannel-ds-s390x created
 ```
-- 部署flannel之后，检查其运行状态以及镜像信息
 
-==**（注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题）**==
+- 部署flannel之后，检查其运行状态以及镜像信息
+==**（注意coredns的pod一直处于ContainerCreating状态，是因为发现我们系统禁用了IPV6导致的问题，开启ipv6就解决了，坑呀，找了好久的问题) **==
 
 ```bash
 $kubectl get pods -n kube-system
