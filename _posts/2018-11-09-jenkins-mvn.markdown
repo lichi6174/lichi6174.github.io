@@ -9,7 +9,7 @@ author: Lichi # Add name author (optional)
 cicd: true
 ---
 
-# 比较好的maven构建命集成命令总结:
+# 比较好的maven构建集成命令总结:
 
 1. 别忘了clean:
 > clean能够保证上一次构建的输出不会影响到本次构建。
