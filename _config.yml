@@ -88,14 +88,14 @@ links1:
     url:          /blog/kubernetes
     type:         kubernetes
     external:     false
-  - name:         Python
-    url:          /blog/python
-    type:         python
-    external:     false
   - name:         CI&CD
     url:          /blog/cicd
     type:         ci&cd
     external:     false
+  - name:         Python
+    url:          /blog/python
+    type:         python
+    external:     false  
   - name:         Other
     url:          /blog/other
     type:         other
@@ -105,6 +105,6 @@ blog_2:    essays
 blog_3:    linuxos
 blog_4:    mysql
 blog_5:    kubernetes
-blog_6:    ci&cd
+blog_6:    cicd
 blog_7:    python
 blog_8:    other
