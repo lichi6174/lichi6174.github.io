@@ -34,7 +34,7 @@ cicd: true
 
 综上，持续集成服务器上的集成命令应该为 clean install -B -e -U -Denv=prd -Dmaven.test.skip=true -Dmaven.repo.local=${本地仓库路径} 。此外，定期清理持续集成服务器的本地Maven仓库也是个很好的习惯，这样可以避免浪费磁盘资源，几乎所有的持续集成服务器软件都支持本地的脚本任务，你可以写一行简单的shell或bat脚本，然后配置以天为单位自动清理仓库。需要注意的是，这么做的前提是你有私有Maven仓库，否则每次都从Internet下载所有依赖会是一场噩梦。
 
-# maven package install deploy区别
+# maven package,install,deploy区别:
 
 1. *package*{: style="color: red"}命令完成了项目编译、单元测试、打包功能，但没有把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库和远程maven私服仓库。
 2. *install*{: style="color: red"}命令完成了项目编译、单元测试、打包功能，同时把打好的可执行jar包（war包或其它形式的包）布署到本地maven仓库，但没有布署到远程maven私服仓库。
