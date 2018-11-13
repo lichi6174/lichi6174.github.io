@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 比较好的maven构建命集成命令总结
+title: 比较好的maven构建集成命令总结
 date:  2018-11-13 16:11:00 +0900  
 description: 持续集成和持续发布相关
 img: post-2.jpg # Add image post (optional)
