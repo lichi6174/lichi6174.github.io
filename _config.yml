@@ -92,6 +92,10 @@ links1:
     url:          /blog/python
     type:         python
     external:     false
+  - name:         CI&CD
+    url:          /blog/cicd
+    type:         ci&cd
+    external:     false
   - name:         Other
     url:          /blog/other
     type:         other
@@ -101,5 +105,6 @@ blog_2:    essays
 blog_3:    linuxos
 blog_4:    mysql
 blog_5:    kubernetes
-blog_6:    python
-blog_7:    other
+blog_6:    ci&cd
+blog_7:    python
+blog_8:    other

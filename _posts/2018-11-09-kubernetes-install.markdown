@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kubeadm方式部署kubernetes_v1.11.2版本
+title: Kubeadm方式部署kubernetes v1.11.2版本
 date:  2018-11-09 11:22:00 +0900  
 description: kubernetes容器平台相关
 img: post-6.jpg # Add image post (optional)
