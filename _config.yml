@@ -1,4 +1,4 @@
-title: My personal blog - Lichi
+title: Lichi's blog - 专注于互联网运维，Linux，DevOps，DB，Kubernetes，Network，IDC等
 email: lichi6174@163.com
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
@@ -13,7 +13,7 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 author: Lichi # add your name
 author-des: Lichi's BLog # add your name
 author-pic: adam-face.jpg
-about-author: My name is Lichi. I’m a full-time adventure travel blogger and photographer who’s been exploring the world for over 2 years.
+about-author: 爷爷给取名李驰，沿用至今，典型的湖南人，一名IT技术男，来深12年有多，在互联网行业摸爬滚打十多年，专注于互联网运维与架构，包括但不限于Linux运维体系管理，IDC运维管理，虚拟化容器技术，DevOps，数据管理，网络管理等，长期关注互联网运维技术的发展，保持着良好的学习习惯。
 
 # Contact links
 email: lichi6174@163.com # Add your Email address
