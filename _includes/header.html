@@ -18,7 +18,7 @@
 
 			 {% if link.type == site.blog_2 %}
 				 {% for post in site.posts %}
-				   {% if post.essays%}
+				   {% if post.essays %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -26,7 +26,7 @@
 
 			 {% if link.type == site.blog_3 %}
 				{% for post in site.posts %}
-				   {% if post.linux%}
+				   {% if post.linux %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -34,7 +34,7 @@
 
 			 {% if link.type == site.blog_4 %}
 				{% for post in site.posts %}
-				   {% if post.mysql%}
+				   {% if post.mysql %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -42,27 +42,35 @@
 
 			 {% if link.type == site.blog_5 %}
 				{% for post in site.posts %}
-				   {% if post.kubernetes%}
+				   {% if post.kubernetes %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
 			 {% endif %}
 
-       {% if link.type == site.blog_6 %}
-        {% for post in site.posts %}
-           {% if post.python%}
-            {% assign count = count | plus: 1 %}
-           {% endif %}
-         {% endfor %}
-       {% endif %}
+       		 {% if link.type == site.blog_6 %}
+       		  {% for post in site.posts %}
+       		     {% if post.cicd %}
+       		      {% assign count = count | plus: 1 %}
+       		     {% endif %}
+       		   {% endfor %}
+       		 {% endif %}
 
-       {% if link.type == site.blog_7 %}
-        {% for post in site.posts %}
-           {% if post.other%}
-            {% assign count = count | plus: 1 %}
-           {% endif %}
-         {% endfor %}
-       {% endif %}
+       		 {% if link.type == site.blog_7 %}
+       		  {% for post in site.posts %}
+       		     {% if post.python %}
+       		      {% assign count = count | plus: 1 %}
+       		     {% endif %}
+       		   {% endfor %}
+       		 {% endif %}
+
+       		 {% if link.type == site.blog_8 %}
+       		  {% for post in site.posts %}
+       		     {% if post.other %}
+       		      {% assign count = count | plus: 1 %}
+       		     {% endif %}
+       		   {% endfor %}
+       		 {% endif %}
        
 			 <li><a  href="{{ link.url }}"  data-hover="{{link.name}}">{{ link.name }}({{count}})</a></li>
 		 {% endfor %}

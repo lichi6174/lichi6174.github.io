@@ -106,7 +106,7 @@ links1:
     external:     false
 blog_1:    all
 blog_2:    essays
-blog_3:    linuxos
+blog_3:    linux
 blog_4:    mysql
 blog_5:    kubernetes
 blog_6:    cicd
