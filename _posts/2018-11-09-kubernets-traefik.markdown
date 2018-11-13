@@ -16,7 +16,7 @@ kubernetes: true
 > 由于微服务架构以及 Docker 技术和 kubernetes 编排工具最近几年才开始逐渐流行，所以一开始的反向代理服务器比如 nginx、apache 并未提供其支持，毕竟他们也不是先知；所以才会出现 Ingress Controller 这种东西来做 kubernetes 和前端负载均衡器如 nginx 之间做衔接；即 Ingress Controller 的存在就是为了能跟 kubernetes 交互，又能写 nginx 配置，还能 reload 它，这是一种折中方案；而最近开始出现的 traefik 天生就是提供了对 kubernetes 的支持，也就是说 traefik 本身就能跟 kubernetes API 交互，感知后端变化，因此可以得知: 在使用 traefik 时，Ingress Controller 已经无卵用了。
 
 ## 部署Traefik
-> 此部署是基于*https://github.com/gjmzj/kubeasz*{: style="color: red"}项目，使用Ansible脚本安装K8S集群的基础上实现的，朋友们最好参考下这个项目,同时也非常感谢这个项目成员的贡献。
+> 此部署是基于*https://github.com/gjmzj/kubeasz* {: style="color: red"}项目，使用Ansible脚本安装K8S集群的基础上实现的，朋友们最好参考下这个项目,同时也非常感谢这个项目成员的贡献。
 
 ### 创建secret保存HTTPS证书
 
@@ -29,7 +29,7 @@ $kubectl create secret generic traefik-cert --from-file=test.com.crt --from-file
 
 ### 创建configmap保存Traefik配置文件
 
-> 我们这里只做HTTP请求转至HTTPS配置，关于Traefik详细配置请参考官方文档: *https://docs.traefik.io/configuration/commons/*{: style="color: red"}
+> 我们这里只做HTTP请求转至HTTPS配置，关于Traefik详细配置请参考官方文档: *https://docs.traefik.io/configuration/commons/* {: style="color: red"}
 
 ```bash
 $kubectl create configmap traefik-conf --from-file=traefik.toml --namespace=kube-system

@@ -88,9 +88,9 @@ links1:
     url:          /blog/kubernetes
     type:         kubernetes
     external:     false
-  - name:         CI&CD
+  - name:         CICD
     url:          /blog/cicd
-    type:         ci&cd
+    type:         cicd
     external:     false
   - name:         Python
     url:          /blog/python
