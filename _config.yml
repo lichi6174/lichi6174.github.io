@@ -108,6 +108,10 @@ links1:
     url:          /blog/virtualization
     type:         virtualization
     external:     false
+  - name:         Architecture
+    url:          /blog/architecture
+    type:         architecture
+    external:     false
   - name:         DevOps
     url:          /blog/devops
     type:         devops
@@ -145,10 +149,11 @@ blog_6:    dfs
 blog_7:    monitor
 blog_8:    log
 blog_9:    virtualization
-blog_10:   devops
-blog_11:   python
-blog_12:   shell
-blog_13:   network
-blog_14:   security
-blog_15:   idc
-blog_16:   essays
+blog_10:   architecture
+blog_11:   devops
+blog_12:   python
+blog_13:   shell
+blog_14:   network
+blog_15:   security
+blog_16:   idc
+blog_17:   essays
