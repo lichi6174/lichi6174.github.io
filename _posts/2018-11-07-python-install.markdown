@@ -4,7 +4,7 @@ title: python 开发环境搭建
 date:  2018-11-07 11:22:00 +0900  
 description: 开发工具
 img: post-6.jpg # Add image post (optional)
-tags: [Blog, python]
+tags: [Blog,python]
 author: Lichi # Add name author (optional)
 python: true
 ---

@@ -4,9 +4,9 @@ title: kubernets集群中部署Traefik
 date:  2018-11-09 16:10:00 +0900  
 description: kubernetes容器平台相关
 img: post-4.jpg # Add image post (optional)
-tags: [Blog, kubernetes]
+tags: [Blog,virtualization,kubernetes]
 author: Lichi # Add name author (optional)
-kubernetes: true
+virtualization: true
 ---
 
 # kubernets中Traefik的HTTP和HTTPS实现

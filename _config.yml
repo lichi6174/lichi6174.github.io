@@ -76,39 +76,79 @@ links1:
     url:          /
     type:         all
     external:     false
-  - name:         essays
-    url:          /blog/essays
-    type:         essays
-    external:     false
   - name:         Linux
     url:          /blog/linux
     type:         linux
     external:     false
-  - name:         MySQL
-    url:          /blog/mysql
-    type:         mysql
+  - name:         DB
+    url:          /blog/db
+    type:         db
     external:     false
-  - name:         Kubernetes
-    url:          /blog/kubernetes
-    type:         kubernetes
+  - name:         NoSQL
+    url:          /blog/nosql
+    type:         nosql
     external:     false
-  - name:         CICD
-    url:          /blog/cicd
-    type:         cicd
+  - name:         WEB
+    url:          /blog/web
+    type:         web
     external:     false
+  - name:         DFS
+    url:          /blog/dfs
+    type:         dfs
+    external:     false
+  - name:         Monitor
+    url:          /blog/monitor
+    type:         monitor  
+    external:     false
+  - name:         Log
+    url:          /blog/log
+    type:         log
+    external:     false
+  - name:         Virtualization
+    url:          /blog/virtualization
+    type:         virtualization
+    external:     false
+  - name:         DevOps
+    url:          /blog/devops
+    type:         devops
+    external:     false  
   - name:         Python
     url:          /blog/python
     type:         python
-    external:     false  
-  - name:         Other
-    url:          /blog/other
-    type:         other
+    external:     false
+  - name:         Shell
+    url:          /blog/shell
+    type:         shell
+    external:     false
+  - name:         Network
+    url:          /blog/network
+    type:         network
+    external:     false
+  - name:         Security
+    url:          /blog/security
+    type:         security
+    external:     false
+  - name:         IDC
+    url:          /blog/idc
+    type:         idc
+    external:     false
+  - name:         Essays
+    url:          /blog/essays
+    type:         essays
     external:     false
 blog_1:    all
-blog_2:    essays
-blog_3:    linux
-blog_4:    mysql
-blog_5:    kubernetes
-blog_6:    cicd
-blog_7:    python
-blog_8:    other
+blog_2:    linux
+blog_3:    db
+blog_4:    nosql
+blog_5:    web
+blog_6:    dfs
+blog_7:    monitor
+blog_8:    log
+blog_9:    virtualization
+blog_10:   devops
+blog_11:   python
+blog_12:   shell
+blog_13:   network
+blog_14:   security
+blog_15:   idc
+blog_16:   essays
