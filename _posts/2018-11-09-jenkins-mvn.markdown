@@ -32,7 +32,9 @@ cicd: true
 7. 使用-B参数:
 > 该参数表示让Maven使用批处理模式构建项目，能够避免一些需要人工参与交互而造成的挂起状态。
 
-综上，持续集成服务器上的集成命令应该为:*mvn clean install -B -e -U -Denv=prd -Dmaven.test.skip=true -Dmaven.repo.local=${本地仓库路径}*{: style="color: red"} 。此外，定期清理持续集成服务器的本地Maven仓库也是个很好的习惯，这样可以避免浪费磁盘资源，几乎所有的持续集成服务器软件都支持本地的脚本任务，你可以写一行简单的shell或bat脚本，然后配置以天为单位自动清理仓库。需要注意的是，这么做的前提是你有私有Maven仓库，否则每次都从Internet下载所有依赖会是一场噩梦。
+## 综上，持续集成服务器上的集成命令应该为:
+> *mvn clean install -B -e -U -Denv=prd -Dmaven.test.skip=true -Dmaven.repo.local=${本地仓库路径}*{: style="color: red"}
+> 此外，定期清理持续集成服务器的本地Maven仓库也是个很好的习惯，这样可以避免浪费磁盘资源，几乎所有的持续集成服务器软件都支持本地的脚本任务，你可以写一行简单的shell或bat脚本，然后配置以天为单位自动清理仓库。需要注意的是，这么做的前提是你有私有Maven仓库，否则每次都从Internet下载所有依赖会是一场噩梦。
 
 # maven package,install,deploy区别:
 
