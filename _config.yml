@@ -40,7 +40,7 @@ discus_identifier: mr-brown # Add your discus identifier
 analytics: # Google Analytics
 
 # Paginate
-paginate: 9
+paginate: 12
 paginate_path: /page:num/
 
 # Build settings
