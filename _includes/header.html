@@ -98,7 +98,7 @@
 
        		 {% if link.type == site.blog_12 %}
        		  {% for post in site.posts %}
-       		     {% if post.python %}
+       		     {% if post.network %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -106,7 +106,7 @@
 
        		 {% if link.type == site.blog_13 %}
        		  {% for post in site.posts %}
-       		     {% if post.shell %}
+       		     {% if post.security %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -114,29 +114,13 @@
 
        		 {% if link.type == site.blog_14 %}
        		  {% for post in site.posts %}
-       		     {% if post.network %}
-       		      {% assign count = count | plus: 1 %}
-       		     {% endif %}
-       		   {% endfor %}
-       		 {% endif %}
-
-       		 {% if link.type == site.blog_15 %}
-       		  {% for post in site.posts %}
-       		     {% if post.security %}
-       		      {% assign count = count | plus: 1 %}
-       		     {% endif %}
-       		   {% endfor %}
-       		 {% endif %}
-
-       		 {% if link.type == site.blog_16 %}
-       		  {% for post in site.posts %}
        		     {% if post.idc %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
        		 {% endif %}
 
-       		 {% if link.type == site.blog_17 %}
+       		 {% if link.type == site.blog_15 %}
        		  {% for post in site.posts %}
        		     {% if post.essays %}
        		      {% assign count = count | plus: 1 %}

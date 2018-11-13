@@ -115,14 +115,6 @@ links1:
   - name:         DevOps
     url:          /blog/devops
     type:         devops
-    external:     false  
-  - name:         Python
-    url:          /blog/python
-    type:         python
-    external:     false
-  - name:         Shell
-    url:          /blog/shell
-    type:         shell
     external:     false
   - name:         Network
     url:          /blog/network
@@ -151,9 +143,7 @@ blog_8:    log
 blog_9:    virtualization
 blog_10:   architecture
 blog_11:   devops
-blog_12:   python
-blog_13:   shell
-blog_14:   network
-blog_15:   security
-blog_16:   idc
-blog_17:   essays
+blog_12:   network
+blog_13:   security
+blog_14:   idc
+blog_15:   essays
