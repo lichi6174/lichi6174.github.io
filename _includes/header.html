@@ -82,7 +82,7 @@
 
        		 {% if link.type == site.blog_10 %}
        		  {% for post in site.posts %}
-       		     {% if post.network %}
+       		     {% if post.security %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -90,7 +90,7 @@
 
        		 {% if link.type == site.blog_11 %}
        		  {% for post in site.posts %}
-       		     {% if post.security %}
+       		     {% if post.network %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}

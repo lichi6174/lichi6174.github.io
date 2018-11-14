@@ -75,10 +75,6 @@ links1:
     url:          /
     type:         all
     external:     false
-  - name:         Linux
-    url:          /blog/linux
-    type:         linux
-    external:     false
   - name:         DevOps
     url:          /blog/devops
     type:         devops
@@ -86,6 +82,14 @@ links1:
   - name:         Architecture
     url:          /blog/architecture
     type:         architecture
+    external:     false
+  - name:         Virtualization
+    url:          /blog/virtualization
+    type:         virtualization
+    external:     false
+  - name:         Linux
+    url:          /blog/linux
+    type:         linux
     external:     false
   - name:         DB
     url:          /blog/db
@@ -103,17 +107,13 @@ links1:
     url:          /blog/dfs
     type:         dfs
     external:     false
-  - name:         Virtualization
-    url:          /blog/virtualization
-    type:         virtualization
+  - name:         Security
+    url:          /blog/security
+    type:         security
     external:     false
   - name:         Network
     url:          /blog/network
     type:         network
-    external:     false
-  - name:         Security
-    url:          /blog/security
-    type:         security
     external:     false
   - name:         Essays
     url:          /blog/essays
@@ -128,6 +128,6 @@ blog_6:    db
 blog_7:    nosql
 blog_8:    web
 blog_9:    dfs
-blog_10:   network
-blog_11:   security
+blog_10:   security
+blog_11:   network
 blog_12:   essays
