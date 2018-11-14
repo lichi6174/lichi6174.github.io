@@ -70,7 +70,6 @@ links:
 #2：在_includes里面headr.html中添加对应内容
 #3：在根目录blog文件中创建对应内容
 
-
 links1:
   - name:         All
     url:          /
@@ -79,6 +78,14 @@ links1:
   - name:         Linux
     url:          /blog/linux
     type:         linux
+    external:     false
+  - name:         DevOps
+    url:          /blog/devops
+    type:         devops
+    external:     false
+  - name:         Architecture
+    url:          /blog/architecture
+    type:         architecture
     external:     false
   - name:         DB
     url:          /blog/db
@@ -96,25 +103,9 @@ links1:
     url:          /blog/dfs
     type:         dfs
     external:     false
-  - name:         Monitor
-    url:          /blog/monitor
-    type:         monitor  
-    external:     false
-  - name:         Log
-    url:          /blog/log
-    type:         log
-    external:     false
   - name:         Virtualization
     url:          /blog/virtualization
     type:         virtualization
-    external:     false
-  - name:         Architecture
-    url:          /blog/architecture
-    type:         architecture
-    external:     false
-  - name:         DevOps
-    url:          /blog/devops
-    type:         devops
     external:     false
   - name:         Network
     url:          /blog/network
@@ -124,26 +115,19 @@ links1:
     url:          /blog/security
     type:         security
     external:     false
-  - name:         IDC
-    url:          /blog/idc
-    type:         idc
-    external:     false
   - name:         Essays
     url:          /blog/essays
     type:         essays
     external:     false
 blog_1:    all
-blog_2:    linux
-blog_3:    db
-blog_4:    nosql
-blog_5:    web
-blog_6:    dfs
-blog_7:    monitor
-blog_8:    log
-blog_9:    virtualization
-blog_10:   architecture
-blog_11:   devops
-blog_12:   network
-blog_13:   security
-blog_14:   idc
-blog_15:   essays
+blog_2:    devops
+blog_3:    architecture
+blog_4:    virtualization
+blog_5:    linux
+blog_6:    db
+blog_7:    nosql
+blog_8:    web
+blog_9:    dfs
+blog_10:   network
+blog_11:   security
+blog_12:   essays

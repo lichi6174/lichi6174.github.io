@@ -18,7 +18,7 @@
 
 			 {% if link.type == site.blog_2 %}
 				 {% for post in site.posts %}
-				   {% if post.linux %}
+				   {% if post.devops %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -26,7 +26,7 @@
 
 			 {% if link.type == site.blog_3 %}
 				{% for post in site.posts %}
-				   {% if post.db %}
+				   {% if post.architecture %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -34,7 +34,7 @@
 
 			 {% if link.type == site.blog_4 %}
 				{% for post in site.posts %}
-				   {% if post.nosql %}
+				   {% if post.virtualization %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -42,7 +42,7 @@
 
 			 {% if link.type == site.blog_5 %}
 				{% for post in site.posts %}
-				   {% if post.web %}
+				   {% if post.linux %}
 						{% assign count = count | plus: 1 %}
 				   {% endif %}
 				 {% endfor %}
@@ -50,7 +50,7 @@
 
        		 {% if link.type == site.blog_6 %}
        		  {% for post in site.posts %}
-       		     {% if post.dfs %}
+       		     {% if post.db %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -58,7 +58,7 @@
 
        		 {% if link.type == site.blog_7 %}
        		  {% for post in site.posts %}
-       		     {% if post.monitor %}
+       		     {% if post.nosql %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -66,7 +66,7 @@
 
        		 {% if link.type == site.blog_8 %}
        		  {% for post in site.posts %}
-       		     {% if post.log %}
+       		     {% if post.web %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -74,7 +74,7 @@
 
        		 {% if link.type == site.blog_9 %}
        		  {% for post in site.posts %}
-       		     {% if post.virtualization %}
+       		     {% if post.dfs %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -82,7 +82,7 @@
 
        		 {% if link.type == site.blog_10 %}
        		  {% for post in site.posts %}
-       		     {% if post.architecture %}
+       		     {% if post.network %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
@@ -90,37 +90,13 @@
 
        		 {% if link.type == site.blog_11 %}
        		  {% for post in site.posts %}
-       		     {% if post.devops %}
-       		      {% assign count = count | plus: 1 %}
-       		     {% endif %}
-       		   {% endfor %}
-       		 {% endif %}
-
-       		 {% if link.type == site.blog_12 %}
-       		  {% for post in site.posts %}
-       		     {% if post.network %}
-       		      {% assign count = count | plus: 1 %}
-       		     {% endif %}
-       		   {% endfor %}
-       		 {% endif %}
-
-       		 {% if link.type == site.blog_13 %}
-       		  {% for post in site.posts %}
        		     {% if post.security %}
        		      {% assign count = count | plus: 1 %}
        		     {% endif %}
        		   {% endfor %}
        		 {% endif %}
 
-       		 {% if link.type == site.blog_14 %}
-       		  {% for post in site.posts %}
-       		     {% if post.idc %}
-       		      {% assign count = count | plus: 1 %}
-       		     {% endif %}
-       		   {% endfor %}
-       		 {% endif %}
-
-       		 {% if link.type == site.blog_15 %}
+       		 {% if link.type == site.blog_12 %}
        		  {% for post in site.posts %}
        		     {% if post.essays %}
        		      {% assign count = count | plus: 1 %}
