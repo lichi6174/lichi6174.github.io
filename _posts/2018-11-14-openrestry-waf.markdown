@@ -24,9 +24,9 @@ OpenResty® 是一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集
 ## openrestry 安装部署
 
 - 部署文档参考资料
-> `https://openresty.org/cn/installation.html`
 
-> `https://openresty.org/cn/linux-packages.html`
+> https://openresty.org/cn/installation.html
+> https://openresty.org/cn/linux-packages.html
 
 > 我是在CentOS发行版下通过yum方式安装的，图个简单，毕竟openrestry的部署不是我们的重点。
 
@@ -48,19 +48,19 @@ OpenResty® 是一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集
 
 *参考资料，感谢这两个项目人员的贡献*{: style="color: red"}
 
-> `https://github.com/loveshell/ngx_lua_waf`
+> https://github.com/loveshell/ngx_lua_waf
+> https://github.com/unixhot/waf
 
-> `https://github.com/unixhot/waf`
+- 获取WAF实现的lua代码，并放到openrestry配置文件存放路径:
 
-1. 获取WAF实现的lua代码，并放到openrestry配置文件存放路径:
-
-- PS: yum方式安装openrestry后，程序会在部署在:*/usr/local/openresty*{: style="color: red"}路径。
+> PS: yum方式安装openrestry后，程序会在部署在:*/usr/local/openresty*{: style="color: red"}路径。
 
 ```bash
 #git clone https://github.com/unixhot/waf.git
 #cp -a ./waf/waf /usr/local/openresty/nginx/conf/
 ```
-2. 修改Nginx的配置文件，加入以下配置。在nginx.conf的*http*{: style="color: red"}段添加:
+
+- 修改Nginx的配置文件，加入以下配置。在nginx.conf的*http*{: style="color: red"}段添加:
 
 ```bash
 #WAF
@@ -70,11 +70,11 @@ init_by_lua_file "/usr/local/openresty/nginx/conf/waf/init.lua";
 access_by_lua_file "/usr/local/openresty/nginx/conf/waf/access.lua";
 ```
 
-3. 根据需要修改WAF日志默认存放路径/tmp/,其他配置项参数意思，参考注解：
+- 根据需要修改WAF日志默认存放路径/tmp/,其他配置项参数意思，参考注解：
 
-![image](C33EC68164034EF5AA6508976631E2AC)
+![openrestry-waf]({{site.baseurl}}/assets/img/openrestry-waf.jpg)
 
-4. 验证配置和启动openrestry服务：
+- 验证配置和启动openrestry服务：
 
 ```bash
 #/usr/local/openresty/nginx/sbin/nginx –t
