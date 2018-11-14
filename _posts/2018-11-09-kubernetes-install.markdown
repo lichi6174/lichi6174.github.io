@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Kubeadm方式部署kubernetes v1.11.2版本
+title: Kubeadm方式部署kubernetes
 date:  2018-11-09 11:22:00 +0900  
 description: kubernetes容器平台相关
 img: post-7.jpg # Add image post (optional)
@@ -9,7 +9,7 @@ author: Lichi # Add name author (optional)
 virtualization: true
 ---
 
-# kubeadm安装kubernetes步骤说明：
+# kubeadm部署kubernetes v1.11.2版本步骤说明：
 
 ## 第一步
 ### 准备系统环境
