@@ -1,6 +1,6 @@
 ---
 layout: post
-title: kubernets集群中部署Traefik
+title: Kubernets中部署Traefik
 date:  2018-11-09 16:10:00 +0900  
 description: kubernetes容器平台相关
 img: post-4.jpg # Add image post (optional)

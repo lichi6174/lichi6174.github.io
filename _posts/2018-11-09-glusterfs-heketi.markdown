@@ -1,6 +1,6 @@
 ---
 layout: post
-title: kubernetes集群中部署glusterfs和heketi（动态存储卷实现）
+title: Kubernetes部署Glusterfs+Heketi
 date:  2018-11-09 15:15:00 +0900  
 description: kubernetes容器平台相关
 img: post-5.jpg # Add image post (optional)
@@ -9,7 +9,7 @@ author: Lichi # Add name author (optional)
 virtualization: true
 ---
 
-# 安装glusterfs-kubernetes和heketi
+# 安装glusterfs-kubernetes和heketi(动态存储卷实现)
 
 ## 前言
 
