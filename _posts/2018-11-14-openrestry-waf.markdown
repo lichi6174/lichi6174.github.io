@@ -26,7 +26,7 @@ OpenResty® 是一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集
 - 部署文档参考资料
 
 > https://openresty.org/cn/installation.html
-> https://openresty.org/cn/linux-packages.html
+https://openresty.org/cn/linux-packages.html
 
 > 我是在CentOS发行版下通过yum方式安装的，图个简单，毕竟openrestry的部署不是我们的重点。
 
@@ -49,7 +49,7 @@ OpenResty® 是一个基于 Nginx 与 Lua 的高性能 Web 平台，其内部集
 *参考资料，感谢这两个项目人员的贡献*{: style="color: red"}
 
 > https://github.com/loveshell/ngx_lua_waf
-> https://github.com/unixhot/waf
+https://github.com/unixhot/waf
 
 - 获取WAF实现的lua代码，并放到openrestry配置文件存放路径:
 
@@ -70,7 +70,9 @@ init_by_lua_file "/usr/local/openresty/nginx/conf/waf/init.lua";
 access_by_lua_file "/usr/local/openresty/nginx/conf/waf/access.lua";
 ```
 
-- 根据需要修改WAF日志默认存放路径/tmp/,其他配置项参数意思，参考注解：
+- 根据需要修改WAF配置参数:
+
+> 一般需要修改WAF日志默认存放路径/tmp/,其他配置项参数的修改参考注解即可，被拦截后的提醒页面内容根据需要自行定义：
 
 ![openrestry-waf]({{site.baseurl}}/assets/img/openrestry-waf.jpg)
 
