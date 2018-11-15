@@ -1130,7 +1130,7 @@ $ while true; do wget -q -O- http://nginx1; done;
 ```
 
 ## prometheus告警设置
-1. 访问prometheus的web界面：
+- 访问prometheus的web界面：
 > `http://$NodeIP:39000`
 
 > ![image](A179B41F13F24F0FBA3E0E034C40ECE1)
@@ -1138,22 +1138,22 @@ $ while true; do wget -q -O- http://nginx1; done;
 
 > ![image](EDC8CEA64C824FC2B3B690E9777C538A)
 
-2. 访问alertmanager的web界面：
+- 访问alertmanager的web界面：
 > `http://$NodeIP:39001`
 > 如果已产生告警，可以在这里面查看到
 
 > ![image](8B3B6FE126D0416F9B94605C8AD6D665)
 
-3. 关于prometheus告警规则的编写，可以在以下图示位置进行规则语法和效果验证：
+- 关于prometheus告警规则的编写，可以在以下图示位置进行规则语法和效果验证：
 > ![image](4A18279B0BDB410485EA6859E3E91580)
 
-4. 增加告警规则后生效方法：
+- 增加告警规则后生效方法：
 
 ```bash
 $helms upgrade monitor -f prom-settings.yaml -f prom-alertsmanager.yaml -f prom-alertrules.yaml prometheus
 ```
 
-#### prometheus告警规则举例:
+- prometheus告警规则举例:
 
 > prom-alertrules.yaml
 
@@ -1205,14 +1205,14 @@ serverFiles:
           description: "Pod {{ $labels.kubernetes_io_hostname }} start false"
 ```
 
-#### 其他监控规则参考:
+- 其他监控规则参考:
 
-- 存在执行失败的Job:
+> 存在执行失败的Job:
 ```bash
 kube_job_status_failed{job="kubernetes-service-endpoints",k8s_app="kube-state-metrics"} == 1
 ```
 
-- 集群中存在失败的PVC：
+> 集群中存在失败的PVC：
 ```bash
 kube_persistentvolumeclaim_status_phase{phase="Failed"} == 1
 ```
