@@ -277,12 +277,12 @@ persistentvolume/pvc-0d1624a7-b172-11e8-ac3b-0050569c7a12   20Gi       RWO      
 
 ## 部署Grafana
 
-#### 部署步骤参考prometheus的部署步骤
+- 部署步骤参考prometheus的部署步骤
 
 > 进入相关目录
 > #cd /etc/ansible/manifests/grafana
 
-#### 修改配置以启用持久化存储以及其他相关文件
+- 修改配置以启用持久化存储以及其他相关文件
 
 > values.yaml
 
@@ -334,7 +334,7 @@ dashboardProviders:
         path: /var/lib/grafana/dashboards
 ```
 
-#### helm方式安装grafana
+- helm方式安装grafana
 ```bash
 $ helms install \
     --name grafana \
@@ -343,7 +343,7 @@ $ helms install \
     grafana
 ```
 
-#### 验证grafana安装情况 
+- 验证grafana安装情况 
 - 验证资源情况
 
 ```bash
