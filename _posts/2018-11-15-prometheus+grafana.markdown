@@ -233,7 +233,7 @@ https://prometheus.io/
 
 ## 验证安装
 
-#### 查看相关相关资源情况
+- 查看相关相关资源情况
 
 ```bash 
 $kubectl get pod,svc,storageclasses,pvc,pv -n monitoring
@@ -269,12 +269,11 @@ persistentvolume/pvc-0d1588d0-b172-11e8-ac3b-0050569c7a12   5Gi        RWO      
 persistentvolume/pvc-0d1624a7-b172-11e8-ac3b-0050569c7a12   20Gi       RWO            Delete           Bound     monitoring/monitor-prometheus-server         glusterfs-storage             3m
 ```
 
-#### 访问prometheus的web界面：
+- 访问prometheus的web界面：
 > http://$NodeIP:39000
 
-#### 访问alertmanager的web界面：
+- 访问alertmanager的web界面：
 > http://$NodeIP:39001
-
 
 ## 部署Grafana
 
