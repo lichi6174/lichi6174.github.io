@@ -9,8 +9,6 @@ author: Lichi # Add name author (optional)
 virtualization: true
 ---
 
-# helm方式部署 prometheus + grafana
-
 ## 部署Prometheus
 随着`heapster`项目停止更新并慢慢被`metrics-server`取代，集群监控这项任务也将最终转移。`prometheus`的监控理念、数据结构设计其实相当精简，包括其非常灵活的查询语言；但是对于初学者来说，想要在k8s集群中实践搭建一套相对可用的部署却比较麻烦，由此还产生了不少专门的项目（如：[prometheus-operator](https://github.com/coreos/prometheus-operator)），本文介绍使用`helm chart`部署集群的prometheus监控。  
 - `helm`已成为`CNCF`独立托管项目，预计会更加流行起来
