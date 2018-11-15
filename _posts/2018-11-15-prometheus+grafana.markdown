@@ -59,6 +59,7 @@ drwx------  3 root root  4096 Jun  2 21:39 prometheus/
 
 - helm安装prometheus启用持久化存储，需要修改prometheus目录下values.yaml的配置文件中alertmanager&server部分关于持久化存储定义的参数值，相关部分参考如下：
 > values.yaml
+
 ```bash
 server:
   ## Prometheus server container name
@@ -151,6 +152,7 @@ alertmanager:
     # storageClass: "-"
     storageClass: "glusterfs-storage"
 ```
+
 > prom-settings.yaml
 
 ```bash
