@@ -3,7 +3,7 @@ layout: post
 title: Openrestry(Nginx+Lua)之WAF实现
 date:  2018-11-14 10:11:00 +0900  
 description: web端轻量级安全防御实现
-img: post-2.jpg # Add image post (optional)
+img: post-9.jpg # Add image post (optional)
 tags: [Blog,security,web,openrestry]
 author: Lichi # Add name author (optional)
 security: true

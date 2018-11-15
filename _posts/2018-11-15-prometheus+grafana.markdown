@@ -3,7 +3,7 @@ layout: post
 title: Helm方式部署Prometheus+Grafana
 date:  2018-11-14 10:11:00 +0900  
 description: Helm方式部署Prometheus+Grafana
-img: post-2.jpg # Add image post (optional)
+img: post-8.jpg # Add image post (optional)
 tags: [Blog,virtualization,kubernetes]
 author: Lichi # Add name author (optional)
 virtualization: true
