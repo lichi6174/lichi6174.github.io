@@ -1132,12 +1132,17 @@ $ while true; do wget -q -O- http://nginx1; done;
 ## prometheus告警设置
 - 访问prometheus的web界面：
 > `http://$NodeIP:39000`
+
 > 点击可查看具体告警规则配置
+
 > ![prometheus-alers-rules]({{site.baseurl}}/assets/img/prometheus-alers-rules.jpg)
 
-- 访问alertmanager的web界面：
+- 访问alertmanager的web界面:
+
 > `http://$NodeIP:39001`
+
 > 如果已产生告警，可以在这里面查看到
+
 > ![prometheus-alertmanager]({{site.baseurl}}/assets/img/prometheus-alertmanager.jpg)
 
 - 关于prometheus告警规则的编写，可以在以下图示位置进行规则语法和效果验证：
