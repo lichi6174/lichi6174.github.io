@@ -1150,7 +1150,7 @@ $ while true; do wget -q -O- http://nginx1; done;
 $helms upgrade monitor -f prom-settings.yaml -f prom-alertsmanager.yaml -f prom-alertrules.yaml prometheus
 ```
 
-5. prometheus告警规则举例
+5. prometheus告警规则举例:
 
 > prom-alertrules.yaml
 
@@ -1202,7 +1202,8 @@ serverFiles:
           description: "Pod {{ $labels.kubernetes_io_hostname }} start false"
 ```
 
-6. 其他监控规则参考
+6. 其他监控规则参考:
+
 - 存在执行失败的Job:
 ```bash
 kube_job_status_failed{job="kubernetes-service-endpoints",k8s_app="kube-state-metrics"} == 1
