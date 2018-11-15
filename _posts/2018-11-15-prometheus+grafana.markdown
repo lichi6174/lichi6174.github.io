@@ -21,13 +21,14 @@ virtualization: true
 - kubernetes中已部署好core-dns
 
 ## 部署准备
-1. 参考资料(感谢项目组成员的贡献，此篇文档也是参照补充出来的)：
+#### 参考资料(感谢项目组成员的贡献，此篇文档也是参照补充出来的)：
 > https://github.com/gjmzj/kubeasz/blob/master/docs/guide/prometheus.md
 
-2. 相关文件获取：
+#### 相关文件获取：
 > https://github.com/gjmzj/kubeasz/tree/master/manifests/prometheus
 
-2. 安装目录概览:
+#### 安装目录概览:
+
 ```bash
 #ll /etc/ansible/manifests/prometheus
 drwx------  3 root root  4096 Jun  3 22:42 grafana/
@@ -39,7 +40,7 @@ drwx------  3 root root  4096 Jun  2 21:39 prometheus/
 -rw-r-----  1 root root   294 May 30 18:09 prom-settings.yaml
 ```
 
-3. 文件说明:
+#### 文件说明:
 
 - 目录`prometheus/`和`grafana/`即官方的helm charts，可以使用`helm fetch --untar stable/prometheus` 和 `helm fetch --untar stable/grafana`下载，本安装不会修改任何官方charts里面的内容，这样方便以后跟踪charts版本的更新。
 
@@ -53,7 +54,7 @@ drwx------  3 root root  4096 Jun  2 21:39 prometheus/
 
 - `grafana-dashboards.yaml`：预设置dashboard模板文件。
 
-2. 启用持久化存储卷
+#### 启用持久化存储卷
 
 - 因生产环境一般都是需要持久化存储收集和监控的数据，所以需要启用存储卷，利用我之前已经准备好的glusterfs+heketi方式部署的集群存储，实现动态存储卷，具体请参看我的另一篇*《Kubernetes部署Glusterfs+Heketi》*{: style="color: red"}部署文档。
 
@@ -178,7 +179,7 @@ kubeStateMetrics:
     repository: mirrorgooglecontainers/kube-state-metrics
 ```
 
-3. 其他一些告警邮箱设置以及配置告警规则和个性化prometheus安装参数一些修改，根据实际情况修改即可。
+#### 其他一些告警邮箱设置以及配置告警规则和个性化prometheus安装参数一些修改，根据实际情况修改即可。
 
 ## 安装Prometheus
 
@@ -234,7 +235,7 @@ https://prometheus.io/
 
 ## 验证安装
 
-1. 查看相关相关资源情况
+#### 查看相关相关资源情况
 
 ```bash 
 $kubectl get pod,svc,storageclasses,pvc,pv -n monitoring
@@ -270,21 +271,21 @@ persistentvolume/pvc-0d1588d0-b172-11e8-ac3b-0050569c7a12   5Gi        RWO      
 persistentvolume/pvc-0d1624a7-b172-11e8-ac3b-0050569c7a12   20Gi       RWO            Delete           Bound     monitoring/monitor-prometheus-server         glusterfs-storage             3m
 ```
 
-2. 访问prometheus的web界面：
+#### 访问prometheus的web界面：
 > http://$NodeIP:39000
 
-3. 访问alertmanager的web界面：
+#### 访问alertmanager的web界面：
 > http://$NodeIP:39001
 
 
 ## 部署Grafana
 
-- 部署步骤参考prometheus的部署步骤
-1. 进入相关目录
+#### 部署步骤参考prometheus的部署步骤
 
+> 进入相关目录
 > #cd /etc/ansible/manifests/grafana
 
-2. 修改配置以启用持久化存储以及其他相关文件
+#### 修改配置以启用持久化存储以及其他相关文件
 
 > values.yaml
 
@@ -336,7 +337,7 @@ dashboardProviders:
         path: /var/lib/grafana/dashboards
 ```
 
-3. helm方式安装grafana
+#### helm方式安装grafana
 ```bash
 $ helms install \
     --name grafana \
@@ -345,8 +346,9 @@ $ helms install \
     grafana
 ```
 
-## 验证grafana安装情况 
-1. 验证资源情况
+#### 验证grafana安装情况 
+- 验证资源情况
+
 ```bash
 $kubectl get pod,svc,storageclasses,pvc,pv -n monitoring
 NAME                                                         READY     STATUS    RESTARTS   AGE
@@ -386,11 +388,11 @@ persistentvolume/pvc-0d1624a7-b172-11e8-ac3b-0050569c7a12   20Gi       RWO      
 persistentvolume/pvc-e5de3bd8-b1a1-11e8-ac3b-0050569c7a12   10Gi       RWO            Delete           Bound     monitoring/grafana                           glusterfs-storage             1h
 ```
 
-2. 访问grafana的web界面:
+- 访问grafana的web界面:
 
 > http://$NodeIP:39002
 
-3. 导入一些比较好用的模板
+- 导入一些比较好用的模板
 
 > 去grafana官网查找一些合适的kubernetes监控模板
 > 官网地址：https://grafana.com/dashboards
@@ -1099,9 +1101,7 @@ $ helms upgrade monitor -f prom-settings.yaml -f prom-alertsmanager.yaml -f prom
 $ helms upgrade grafana -f grafana-settings.yaml -f grafana-dashboards.yaml grafana
 ```
 
-- 回退：
-
-> 具体可以参考*helm help rollback文档*{: style="color: red"}
+- 回退：具体可以参考*helm help rollback文档*{: style="color: red"}
 
 ``` bash
 $ helms rollback monitor [REVISION]
@@ -1132,23 +1132,20 @@ $ while true; do wget -q -O- http://nginx1; done;
 # 等待约几分钟查看是否有告警
 ```
 
-
-
 ## prometheus告警设置
 1. 访问prometheus的web界面：
 > `http://$NodeIP:39000`
-![image](A179B41F13F24F0FBA3E0E034C40ECE1)
-- 点击可查看具体告警规则配置
-![image](EDC8CEA64C824FC2B3B690E9777C538A)
+> ![image](A179B41F13F24F0FBA3E0E034C40ECE1)
+> 点击可查看具体告警规则配置
+> ![image](EDC8CEA64C824FC2B3B690E9777C538A)
 
 2. 访问alertmanager的web界面：
 > `http://$NodeIP:39001`
-- 如果已产生告警，可以在这里面查看到
-![image](8B3B6FE126D0416F9B94605C8AD6D665)
+> 如果已产生告警，可以在这里面查看到
+> ![image](8B3B6FE126D0416F9B94605C8AD6D665)
 
 3. 关于prometheus告警规则的编写，可以在以下图示位置进行规则语法和效果验证：
-![image](4A18279B0BDB410485EA6859E3E91580)
-
+> ![image](4A18279B0BDB410485EA6859E3E91580)
 
 4. 增加告警规则后生效方法：
 
@@ -1208,18 +1205,18 @@ serverFiles:
           description: "Pod {{ $labels.kubernetes_io_hostname }} start false"
 ```
 
-其他监控规则参考
-1. 存在执行失败的Job:
+6. 其他监控规则参考
+- 存在执行失败的Job:
 ```bash
 kube_job_status_failed{job="kubernetes-service-endpoints",k8s_app="kube-state-metrics"} == 1
 ```
 
-2. 集群中存在失败的PVC：
+- 集群中存在失败的PVC：
 ```bash
 kube_persistentvolumeclaim_status_phase{phase="Failed"} == 1
 ```
 
-3.最近30分钟内有Pod容器重启: 
+- 最近30分钟内有Pod容器重启: 
 ```bash
 changes(kube_pod_container_status_restarts_total[30m]) > 0
 ```
