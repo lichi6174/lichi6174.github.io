@@ -27,6 +27,7 @@ http {
 ```
 
 - 虚拟主机配置文件简单示例：
+
 > *针对静态资源部分进行缓存*{: style="color: red"}
 
 > /usr/local/nginx/conf/vhosts/abc.xyz.com.conf
@@ -166,8 +167,8 @@ esac
 
 
 > 上面脚本执行后，会提示输入cache的缓存目录，然后选择删除缓存文件的条件（这里我选择"按文件类型删除"），选择了删除html 、htm、js、css、jpg 、gif、 png 、jpeg 、bmp 、flv、 swf 、ico这12中文件格式的缓存文件。
-> 或者直接使用find命令查找缓存目录下的文件，直接将文件全部删除:
-> # find /path/to/cache -type f|xargs rm -f 
+> 或者直接使用find命令查找缓存目录下的文件，直接将文件全部删除。
+> #find /path/to/cache -type f|xargs rm -f 
 
 
 ### 方式二
