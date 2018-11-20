@@ -213,12 +213,14 @@ esac
 
 - 利用此模块删除缓存
 
-> 访问方法：
-> http://abc.xyz.com/static/img/select.png
-> http://abc.xyz.com/purge/static/img/select.png
+> 方法：
 
+> 访问图片资源访，并查看缓存命中情况：
+> http://abc.xyz.com/static/img/select.png
 > ![nginx-hit]({{site.baseurl}}/assets/img/nginx-hit.png)
 
+> 通过purge模块删除此图片nginx代理缓存：
+> http://abc.xyz.com/purge/static/img/select.png
 > ![nginx-purge]({{site.baseurl}}/assets/img/nginx-purge.png)
 
 - *purge删除缓存报404错误可能原因*{: style="color: red"}
