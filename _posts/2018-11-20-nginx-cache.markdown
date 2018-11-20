@@ -166,17 +166,14 @@ esac
 
 
 > 上面脚本执行后，会提示输入cache的缓存目录，然后选择删除缓存文件的条件（这里我选择"按文件类型删除"），选择了删除html 、htm、js、css、jpg 、gif、 png 、jpeg 、bmp 、flv、 swf 、ico这12中文件格式的缓存文件。
+> 或者直接使用find命令查找缓存目录下的文件，直接将文件全部删除:
+> # find /path/to/cache -type f|xargs rm -f 
 
-> 或者直接使用find命令查找缓存目录下的文件，直接将文件全部删除
-
-```
-# find /path/to/cache -type f|xargs rm -f 
-```
 
 ### 方式二
 #### nginx添加ngx_cache_purge-2.3缓存清理模块
 
-1. 获取nginx缓存清理模块并解压
+- 获取nginx缓存清理模块并解压
 
 ```bash
 #cd /root
@@ -185,11 +182,11 @@ esac
 
 ```
 
-2. 查看原nginx编译安装时的命令，安装了哪些模块
+- 查看原nginx编译安装时的命令，安装了哪些模块
 
 > #/usr/local/nginx/sbin/nginx -V
 
-3. 加入需要安装的模块，--add-module=/root/ngx_cache_purge-2.3
+- 加入需要安装的模块，--add-module=/root/ngx_cache_purge-2.3
 
 > *进入到nginx源码包目录下输入以下命令*{: style="color: red"}
 
@@ -201,35 +198,39 @@ esac
 #make
 ```
 
-4. 验证nginx新加模块是否安装成功
+- 验证nginx新加模块是否安装成功
 
 > #/root/nginx-1.12.2/objs/nginx -V，查看ngx_cache_purge是否安装成功。
 
 > ![nginx-config]({{site.baseurl}}/assets/img/nginx-config.jpg)
 
-5. 停止原nginx服务，替换nginx二进制文件，重启nginx服务
+- 停止原nginx服务，替换nginx二进制文件，重启nginx服务
 
 > #/usr/local/nginx/sbin/nginx -s stop
 > #cp /usr/local/nginx/sbin/nginx /usr/local/nginx/sbin/nginx.bak
 > #cp /root/nginx-1.12.2/objs/nginx /usr/local/nginx/sbin/nginx
 > #/usr/local/nginx/sbin/nginx
 
-6. 利用此模块删除缓存
+- 利用此模块删除缓存
 
 > 访问方法：
 > http://abc.xyz.com/static/img/select.png
 > http://abc.xyz.com/purge/static/img/select.png
+
 > ![nginx-hit]({{site.baseurl}}/assets/img/nginx-hit.png)
+
 > ![nginx-purge]({{site.baseurl}}/assets/img/nginx-purge.png)
 
-7. *purge删除缓存报404错误可能原因*{: style="color: red"}
+- *purge删除缓存报404错误可能原因*{: style="color: red"}
 
 > 1. location purge的顺序问题导致
 > 2. proxy_cache_key设置问题：
-> ![nginx-error]({{site.baseurl}}/assets/img/nginx-error.png)
 
-8. 配置示例
-- abc.xyz.com.conf
+![nginx-error]({{site.baseurl}}/assets/img/nginx-error.png)
+
+- 配置示例
+
+> abc.xyz.com.conf
 
 ```bash
 server {
