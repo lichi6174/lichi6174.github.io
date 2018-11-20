@@ -3,8 +3,8 @@ layout: post
 title: nginx缓存和缓存清理
 date:  2018-11-20 10:11:00 +0900  
 description: nginx代理缓存以及缓存清理配置
-img: post-11.jpg # Add image post (optional)
-tags: [Blog,web,nginx]
+img: post-12.jpg # Add image post (optional)
+tags: [Blog,web,nginx,cache]
 author: Lichi # Add name author (optional)
 web: true
 ---
@@ -216,11 +216,15 @@ esac
 > 方法：
 
 > 访问图片资源访，并查看缓存命中情况：
+
 > http://abc.xyz.com/static/img/select.png
+
 > ![nginx-hit]({{site.baseurl}}/assets/img/nginx-hit.png)
 
 > 通过purge模块删除此图片nginx代理缓存：
+
 > http://abc.xyz.com/purge/static/img/select.png
+
 > ![nginx-purge]({{site.baseurl}}/assets/img/nginx-purge.png)
 
 - *purge删除缓存报404错误可能原因*{: style="color: red"}
