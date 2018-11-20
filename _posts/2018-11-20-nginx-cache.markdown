@@ -27,8 +27,8 @@ http {
 ```
 
 - 虚拟主机配置文件简单示例：
-
 > *针对静态资源部分进行缓存*{: style="color: red"}
+
 > /usr/local/nginx/conf/vhosts/abc.xyz.com.conf
 
 ```bash
@@ -90,9 +90,9 @@ server {
 > 10. `proxy_cache_valid` 为不同的HTTP返回状态码的资源设置不同的缓存时长。
 > 11. `proxy_cache_purge` 缓存清理指令，后面会用得上。
 
-# 缓存清理两种方式
-## 方式一
-### nginx缓存批量清理脚本（网上找的，挺好用的，多谢作者！）
+## 缓存清理两种方式
+### 方式一
+#### nginx缓存批量清理脚本（网上找的，挺好用的，多谢作者！）
 
 - nginx_cache_clean.sh
 
@@ -162,12 +162,10 @@ esac
 ```
 - 脚本操作演示
 
-![image](EB9AC304D7DF466197FCA5E86D5A4AA0)
-![image](BBC5AED53E02407E98AC9C98FAFCB58D)
-![image](6392CEA4336C4C728954BCD13C68916C)
+![nginx-cache]({{site.baseurl}}/assets/img/nginx-cache.jpg)
+
 
 > 上面脚本执行后，会提示输入cache的缓存目录，然后选择删除缓存文件的条件（这里我选择"按文件类型删除"），选择了删除html 、htm、js、css、jpg 、gif、 png 、jpeg 、bmp 、flv、 swf 、ico这12中文件格式的缓存文件。
-
 
 > 或者直接使用find命令查找缓存目录下的文件，直接将文件全部删除
 
@@ -175,22 +173,24 @@ esac
 # find /path/to/cache -type f|xargs rm -f 
 ```
 
-## 方式二
-### nginx添加ngx_cache_purge-2.3缓存清理模块
+### 方式二
+#### nginx添加ngx_cache_purge-2.3缓存清理模块
+
 1. 获取nginx缓存清理模块并解压
-```
+
+```bash
 #cd /root
 #wget http://labs.frickle.com/files/ngx_cache_purge-2.3.tar.gz
 #tar xf ngx_cache_purge-2.3.tar.gz
 
 ```
-2. 查看nginx编译安装时的命令，安装了哪些模块
-```
-#/usr/local/nginx/sbin/nginx -V
 
-```
+2. 查看原nginx编译安装时的命令，安装了哪些模块
+
+> #/usr/local/nginx/sbin/nginx -V
 
 3. 加入需要安装的模块，--add-module=/root/ngx_cache_purge-2.3
+
 > *进入到nginx源码包目录下输入以下命令*{: style="color: red"}
 
 > *输入make进行编译，千万不要make install 因为会覆盖原来已经安装好的内容，另外，编译必须没错误才行*{: style="color: red"}
@@ -198,7 +198,6 @@ esac
 ```bash
 #cd /root/nginx-1.12.2
 #./configure --prefix=/usr/local/nginx --with-compat --with-file-aio --with-threads --with-http_addition_module --with-http_auth_request_module --with-http_dav_module --with-http_flv_module --with-http_gunzip_module --with-http_gzip_static_module --with-http_mp4_module --with-http_random_index_module --with-http_realip_module --with-http_secure_link_module --with-http_slice_module --with-http_ssl_module --with-http_stub_status_module --with-http_sub_module --with-http_v2_module --with-mail --with-mail_ssl_module --with-stream --with-stream_realip_module --with-stream_ssl_module --with-stream_ssl_preread_module --with-cc-opt='-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -m64 -mtune=generic -fPIC' --with-ld-opt='-Wl,-z,relro -Wl,-z,now -pie' --add-module=/root/ngx_cache_purge-2.3
-
 #make
 ```
 
@@ -206,19 +205,13 @@ esac
 
 > #/root/nginx-1.12.2/objs/nginx -V，查看ngx_cache_purge是否安装成功。
 
->![image](8CEECA78CEEC43818026FFF4B9CD4623)
+> ![nginx-config]({{site.baseurl}}/assets/img/nginx-config.jpg)
 
-5. 停止原nginx服务，替换nginx二进制文件
+5. 停止原nginx服务，替换nginx二进制文件，重启nginx服务
 
 > #/usr/local/nginx/sbin/nginx -s stop
-
-> 替换前最好先备份一下原来的文件
 > #cp /usr/local/nginx/sbin/nginx /usr/local/nginx/sbin/nginx.bak
->
-> #把重新编译好的/root/nginx-1.12.2/objs/nginx文件复制到/usr/local/nginx/sbin/ 下，替换原来的nginx文件
 > #cp /root/nginx-1.12.2/objs/nginx /usr/local/nginx/sbin/nginx
-
-> #重启启动nginx服务
 > #/usr/local/nginx/sbin/nginx
 
 6. 利用此模块删除缓存
@@ -226,13 +219,14 @@ esac
 > 访问方法：
 > http://abc.xyz.com/static/img/select.png
 > http://abc.xyz.com/purge/static/img/select.png
->![image](8650539325B642039BB17E8C38706FD5)
->![image](54BE7E90EF824659BB5E8B7F76235F09)
+> ![nginx-hit]({{site.baseurl}}/assets/img/nginx-hit.png)
+> ![nginx-purge]({{site.baseurl}}/assets/img/nginx-purge.png)
 
 7. *purge删除缓存报404错误可能原因*{: style="color: red"}
+
 > 1. location purge的顺序问题导致
 > 2. proxy_cache_key设置问题：
-![image](A4C4108C8E284C2391CB79E2CC54DCF3)
+> ![nginx-error]({{site.baseurl}}/assets/img/nginx-error.png)
 
 8. 配置示例
 - abc.xyz.com.conf
