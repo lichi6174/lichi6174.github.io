@@ -3,7 +3,7 @@ layout: post
 title: Kubernetes部署Glusterfs+Heketi
 date:  2018-11-09 15:15:00 +0900  
 description: kubernetes容器平台相关
-img: post-5.jpg # Add image post (optional)
+img: post-13.jpg # Add image post (optional)
 tags: [Blog,virtualization,kubernetes]
 author: Lichi # Add name author (optional)
 virtualization: true
