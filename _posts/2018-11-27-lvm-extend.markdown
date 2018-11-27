@@ -105,7 +105,7 @@ wq
 #fdisk -l /dev/vdb
 ```
 
-#### 10. 将新增的分区加入到卷组中，v`gdisplay`可以看到 `Free PE`空间大小。
+#### 10. 将新增的分区加入到卷组中,使用 `vgdisplay` 可以查看到 `Free PE`字段值，即为空闲的空间大小。
 
 ```bash
 #vgextend vg01 /dev/vdb2
