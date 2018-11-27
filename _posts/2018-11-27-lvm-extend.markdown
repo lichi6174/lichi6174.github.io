@@ -21,17 +21,17 @@ linux: true
 - 本文档介绍的操作只作为标准情况下的示例。如果您有特殊的分区配置，由于使用场景千差万别，无法逐一枚举，需要您自行结合实际情况进行处理。
 
 ## 操作方法如下：
-#### 1. 在阿里云控制台给需要扩容的磁盘扩容，之后可以看到磁盘已经是 6G（原有大小 5G），但是系统内查看还是原大小（5G）。
+#### 1. 在阿里云控制台给需要扩容的ECS实例的某个磁盘库容到指定大小，比如/dev/vdb由原来的5G扩容到6G，通过控制台可看到磁盘已经是 6G大小，但是系统内使用命令：*fdisk -l /dev/vdb*{: style="color: red"}， 查看还是5G大小。
 
 ```bash
 #fdisk -l /dev/vdb
 ```
 
-#### 2. 系统中将已经挂载的分区取消挂载。
-
-- > #pvdisplay
+#### 2. 系统中将已经挂载的分区取消挂逻辑分区载。
+- 查看物理卷、磁盘空间、分区表信息
 
 ```bash
+#pvdisplay
   --- Physical volume ---
   PV Name               /dev/vdb1
   VG Name               vg01
@@ -42,11 +42,8 @@ linux: true
   Free PE               0
   Allocated PE          262143
   PV UUID               CMtVvJ-ndci-BTOx-iJBL-lzN6-Xwln-0P8h4C
-```
-
-- > #df -lh
-
-```bash
+#
+#df -lh
  Filesystem             Size  Used Avail Use% Mounted on
  /dev/vda1               40G  7.0G   31G  19% /
  devtmpfs               7.8G     0  7.8G   0% /dev
@@ -55,12 +52,8 @@ linux: true
  tmpfs                  7.8G     0  7.8G   0% /sys/fs/cgroup
  /dev/mapper/vg01-lv01 1008G  790G  167G  83% /home
  tmpfs                  1.6G     0  1.6G   0% /run/user/0
-```
-
-- > #cat /etc/fstab
-
-```bash
-#/etc/fstab
+#
+#cat /etc/fstab
 #Created by anaconda on Mon Jul 10 12:22:03 2017
 #
 # Accessible filesystems, by reference, are maintained under '/dev/disk'
@@ -71,11 +64,18 @@ UUID=b7792c31-ad03-4f04-a650-a72e861c892d /                       ext4    defaul
 /home/swap swap swap defaults 0 0
 ```
 
-- > #umount /dev/vg01/lv01
+- 取消逻辑分区的挂载
+
+```bash
+#umount /dev/vg01/lv01
+```
 
 #### 3. 取消逻辑卷的激活状态并查看逻辑卷激活状态。
-- > #vgchange -an /dev/vg01/lv01
-- > #lvscan
+
+```bash
+#vgchange -an /dev/vg01/lv01
+#lvscan
+```
 
 #### 4. 如果数据盘是和实例一起购买的且并未转换成按量付费磁盘，那么控制台操作重启实例以完成磁盘底层扩容,待系统重启完成后跳过紧随其后的两个骤继续操作,如果数据盘是单独购买的或者已经变更成按量付费磁盘，那么继续执行紧随其后的两个步骤。
 
@@ -83,10 +83,10 @@ UUID=b7792c31-ad03-4f04-a650-a72e861c892d /                       ext4    defaul
 
 #### 6. 控制台重新挂载磁盘。
 
-#### 7. 运行 **==fdisk -l /dev/vdb==** 可以看到磁盘空间变大了。
+#### 7. 运行 *fdisk -l /dev/vdb*{: style="color: red"}，可以看到磁盘空间变大了。
 - > #fdisk -l /dev/vdb
 
-#### 8. 运行 fdisk /dev/vdb 对磁盘进行分区操作，添加一个新分区（vdb2）并保存。
+#### 8. 运行 *fdisk /dev/vdb*{: style="color: red"}，对磁盘进行分区操作，添加一个新分区（vdb2）并保存。
 
 ```bash
 #fdisk /dev/vdb
@@ -96,15 +96,15 @@ p
 wq
 ```
 
-#### 9. 运行 **==fdisk -l /dev/vdb==** 。此时有两个分区，分别是：**==/dev/vdb1==**（原有的分区名） 和 **==/dev/vdb2==**（新增的分区名）。
+#### 9. 运行 *fdisk -l /dev/vdb*{: style="color: red"}，此时有两个分区，分别是：**==/dev/vdb1==**（原有的分区名） 和 **==/dev/vdb2==**（新增的分区名）。
 
-#### 10. 将新增的分区加入到卷组中，vgdisplay 可以看到 Free PE 空间大小。
+#### 10. 将新增的分区加入到卷组中，vg`display` 可以看到 Free PE 空间大小。
 ```bash
 #vgextend vg01 /dev/vdb2
 #vgdisplay
 ```
 
-#### 11. 运行 **==lvextend -l +100%FREE /dev/vg01/lv01==** 增加空间，vgdisplay 可以查看到 Free PE 为空了。
+#### 11. 运行 *==lvextend -l +100%FREE /dev/vg01/lv01*{: style="color: red"}，增加空间，v`gdisplay` 可以查看到 `Free PE字段值`为空了。
 ```bash
 #lvextend -l +100%FREE /dev/vg01/lv01
 ```
