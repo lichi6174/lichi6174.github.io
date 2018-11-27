@@ -84,7 +84,10 @@ UUID=b7792c31-ad03-4f04-a650-a72e861c892d /                       ext4    defaul
 #### 6. 控制台重新挂载磁盘。
 
 #### 7. 运行 *fdisk -l /dev/vdb*{: style="color: red"}，可以看到磁盘空间变大了。
-- > #fdisk -l /dev/vdb
+
+```bash
+#fdisk -l /dev/vdb
+```
 
 #### 8. 运行 *fdisk /dev/vdb*{: style="color: red"}，对磁盘进行分区操作，添加一个新分区（vdb2）并保存。
 
@@ -96,20 +99,27 @@ p
 wq
 ```
 
-#### 9. 运行 *fdisk -l /dev/vdb*{: style="color: red"}，此时有两个分区，分别是：**==/dev/vdb1==**（原有的分区名） 和 **==/dev/vdb2==**（新增的分区名）。
+#### 9. 运行 *fdisk -l /dev/vdb*{: style="color: red"}，此时有两个分区，分别是：*/dev/vdb1*{: style="color: red"}（原有的分区名） 和 */dev/vdb2*{: style="color: red"}（新增的分区名）。
 
-#### 10. 将新增的分区加入到卷组中，vg`display` 可以看到 Free PE 空间大小。
+```bash
+#fdisk -l /dev/vdb
+```
+
+#### 10. 将新增的分区加入到卷组中，v`gdisplay`可以看到 `Free PE`空间大小。
+
 ```bash
 #vgextend vg01 /dev/vdb2
 #vgdisplay
 ```
 
-#### 11. 运行 *==lvextend -l +100%FREE /dev/vg01/lv01*{: style="color: red"}，增加空间，v`gdisplay` 可以查看到 `Free PE字段值`为空了。
+#### 11. 运行 *lvextend -l +100%FREE /dev/vg01/lv01*{: style="color: red"}，增加空间，`vgdisplay` 可以查看到 `Free PE`字段值为空了。
+
 ```bash
 #lvextend -l +100%FREE /dev/vg01/lv01
 ```
 
 #### 12. 执行如下命令，确认文件系统的类型。
+
 ```bash
 #fsck -N /dev/vg01/lv01
 fsck from util-linux 2.23.2
@@ -118,16 +128,19 @@ fsck from util-linux 2.23.2
 
 #### 13. 根据文件系统类型来变更分区大小。
 - ext4文件系统类型,变更分区大小命令。
+
 ```bash
 #resize2fs /dev/vg01/lv01 
 ```
 
 -  xfs文件系统类型,变更分区大小命令。
+
 ```bash
 #xfs_growfs /dev/vg01/lv01
 ```
 
 #### 14. 重新挂载分区可以查看到空间变大了，原有数据还在。
+
 ```bash
 #mount /dev/vg01/lv01 /home
 #df -lh
