@@ -105,20 +105,34 @@ wq
 #fdisk -l /dev/vdb
 ```
 
-#### 10. 将新增的分区加入到卷组中,使用 `vgdisplay` 可以查看到 `Free PE`字段值，即为空闲的空间大小。
+#### 10. 让之后的vgextend扩展VG组时候能识别新建分区名 *（/dev/vdb2）*{: style="color: red"}，否则可能会报错。
+
+```bash
+#partprobe /dev/vdb
+```
+
+#### 11. 将新增的分区加入到卷组中,使用 `vgdisplay` 可以查看到 `Free PE`字段值，即为空闲的空间大小。
 
 ```bash
 #vgextend vg01 /dev/vdb2
 #vgdisplay
 ```
 
-#### 11. 运行 *lvextend -l +100%FREE /dev/vg01/lv01*{: style="color: red"}，增加空间，`vgdisplay` 可以查看到 `Free PE`字段值为空了。
+#### 12. 运行 *lvextend -l +100%FREE /dev/vg01/lv01*{: style="color: red"}，增加空间，`vgdisplay` 可以查看到 `Free PE`字段值为空了。
 
 ```bash
 #lvextend -l +100%FREE /dev/vg01/lv01
 ```
 
-#### 12. 执行如下命令，确认文件系统的类型。
+#### 13. 重新挂载分区（要先挂载分区，才能执行扩展分区的命令）。
+
+```bash
+#mount /dev/vg01/lv01 /home
+#df -lh
+```
+
+
+#### 14. 执行如下命令，确认文件系统的类型。
 
 ```bash
 #fsck -N /dev/vg01/lv01
@@ -126,7 +140,7 @@ fsck from util-linux 2.23.2
 [/sbin/fsck.ext4 (1) -- /home] fsck.ext4 /dev/mapper/vg01-lv01
 ```
 
-#### 13. 根据文件系统类型来变更分区大小。
+#### 15. 根据上面步骤得知需扩展的LVM逻辑分区的文件系统类型，并进行真正的LVM逻辑分区扩展操作。
 - ext4文件系统类型,变更分区大小命令。
 
 ```bash
@@ -139,11 +153,6 @@ fsck from util-linux 2.23.2
 #xfs_growfs /dev/vg01/lv01
 ```
 
-#### 14. 重新挂载分区可以查看到空间变大了，原有数据还在。
+#### 16. 验证原有数据是否未丢失。
 
-```bash
-#mount /dev/vg01/lv01 /home
-#df -lh
-```
-
-### *注意: 操作示例中 vg01 是 VG 名称，lv01 是逻辑卷名称，请根据实际情况填写。*{: style="color: red"}
+#### 17. *注意: 操作示例中 vg01 是 VG 名称，lv01 是逻辑卷名称，请根据实际情况填写。*{: style="color: red"}
