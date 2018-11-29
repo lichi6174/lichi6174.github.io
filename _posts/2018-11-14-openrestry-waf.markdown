@@ -117,3 +117,83 @@ http {
 include vhosts/*.conf;
 }
 ```
+
+## 关于lua脚本获取客户端真实IP方法调整
+> 原代码获取客户端真实IP，如果经过多个代理节点传过来的X_Forwarded_For的IP值不止一个的时候会有问题。
+
+### 1. 此功能函数定义的脚本位置：
+> /usr/local/openresty/nginx/conf/waf/lib.lua
+
+### 2. 此功能函数参考：
+#### 方法一：
+- 原代码：
+
+```bash
+--Get the client IP
+function get_client_ip()
+    CLIENT_IP = ngx.req.get_headers()["X_real_ip"]
+    if CLIENT_IP == nil then
+        CLIENT_IP = ngx.req.get_headers()["X_Forwarded_For"]
+    end
+    if CLIENT_IP == nil then
+        CLIENT_IP  = ngx.var.remote_addr
+    end
+    if CLIENT_IP == nil then
+        CLIENT_IP  = "unknown"
+    end
+    return CLIENT_IP
+end
+```
+
+#### 方法二：
+> 部分客户端访问经过多个代理节点之后，X_Forwarded_For获得的IP地址可能不止一个，我们只取第一个ip地址即为客户端真实IP地址，比如如下日志记录：
+
+```bash
+100.116.224.220 - - [29/Nov/2018:09:14:37 +0800-1543454077.462] "POST /api/operation/abc HTTP/1.1" 200 873 "https://abc.com/2018031602388641/0.2.1811161506.32/index.html" "Mozilla/5.0 (Linux; U; Android 9; zh-CN; ALP-AL00 Build/HUAWEIALP-AL00)" "223.104.64.51, 11.34.31.180, 110.75.242.180"
+```
+
+- 调整后代码(经验证有效)：
+
+```bash
+--Get the client IP
+function get_client_ip()
+    CLIENT_IP = ngx.req.get_headers()["X_real_ip"]
+    if CLIENT_IP == nil then
+        if ngx.var.http_x_forwarded_for ~= nil then
+        CLIENT_IP = string.match(ngx.var.http_x_forwarded_for, "%d+.%d+.%d+.%d+", 1);
+        end
+    end
+    if CLIENT_IP == nil then
+        CLIENT_IP  = ngx.var.remote_addr or '127.0.0.1'
+    end
+    if CLIENT_IP == nil then
+        CLIENT_IP  = "unknown"
+    end
+    return CLIENT_IP
+end
+```
+
+#### 方法三：
+- 调整后代码（验证无效）
+
+```bash
+--Get the client IP
+function get_client_ip()
+    HEADERS = ngx.req.get_headers()
+    CLIENT_IP = HEADERS["X_real_ip"]
+    if CLIENT_IP == nil then
+       if type(HEADERS["x-forwarded-for"]) == "table" then
+           CLIENT_IP = HEADERS["x-forwarded-for"][1]
+       else
+           CLIENT_IP = HEADERS["x-forwarded-for"]
+       end
+    end
+    if CLIENT_IP == nil then
+        CLIENT_IP  = ngx.var.remote_addr or '127.0.0.1'
+    end
+    if CLIENT_IP == nil then
+        CLIENT_IP  = "unknown"
+    end
+    return CLIENT_IP
+end
+```
