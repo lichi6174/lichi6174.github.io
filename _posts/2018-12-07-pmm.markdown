@@ -1,0 +1,175 @@
+---
+layout: post
+title: Percona Monitoring and Management（PMM）部署
+date:  2018-11-27 16:11:00 +0900  
+description: Percona Monitoring and Management（PMM）部署
+img: post-6.jpg # Add image post (optional)
+tags: [Blog,mysql,monitor]
+author: Lichi # Add name author (optional)
+mysql: true
+---
+
+# Percona Monitoring and Management（PMM）部署
+
+## 官方文档资源获取
+- `https://learn.percona.com/hubfs/Manuals/Percona_Monitoring_And_Management_PMM/PMM%201.17/Percona-Monitoring-And-Management-1.17.0.pdf`
+
+### PMM Server端安装部署
+
+- 我们的部署是基于docker容器的方式实现，简单高效
+
+1. *注意，需要开启linux内核的ip_forward转发功能*{: style="color: red"}
+
+- 获取PMM Server安装脚本并安装
+
+```bash
+#curl -fsSL https://raw.githubusercontent.com/percona/pmm/master/get-pmm.sh -o get-pmm.sh
+#sh get-pmm.sh
+```
+
+- 根据需要,调整脚本参数，比如监听服务的监听端口以及开启Grafana的登录验证功能等，脚本参考如下：
+```bash
+#!/bin/sh
+
+set -o errexit
+set -o xtrace
+
+root_is_needed='no'
+
+check_command() {
+    command -v "$@" > /dev/null 2>&1
+}
+
+run_root() {
+    sh='sh -c'
+    if [ "$(id -un)" != 'root' ]; then
+        if check_command sudo; then
+            sh='sudo -E sh -c'
+        elif check_command su; then
+            sh='su -c'
+        else
+            echo ERROR: root rights needed to run "$*" command
+            exit 1
+        fi
+    fi
+    ${sh} "$@"
+}
+
+install_docker() {
+    if ! check_command docker; then
+        echo Installing docker
+        curl -fsSL get.docker.com -o /tmp/get-docker.sh \
+            || wget -qO /tmp/get-docker.sh get.docker.com
+        sh /tmp/get-docker.sh
+        run_root 'service docker start' || :
+    fi
+    if ! docker ps; then
+        root_is_needed='yes'
+        if ! run_root 'docker ps'; then
+            echo ERROR: cannot run "docker ps" command
+            exit 1
+        fi
+    fi
+}
+
+run_docker() {
+    if [ "${root_is_needed}" = 'yes' ]; then
+        run_root "docker $*"
+    else
+        sh -c "docker $*"
+    fi
+}
+
+
+start_pmm() {
+    run_docker pull percona/pmm-server:latest
+
+    if ! run_docker inspect pmm-data >/dev/null; then
+        run_docker create \
+            -v /opt/prometheus/data \
+            -v /opt/consul-data \
+            -v /var/lib/mysql \
+            -v /var/lib/grafana \
+            --name pmm-data \
+            percona/pmm-server:latest /bin/true
+    fi
+
+    if run_docker inspect pmm-server >/dev/null; then
+        run_docker stop pmm-server || :
+        run_docker rename pmm-server "pmm-server-$(date "+%F-%H%M%S")"
+    fi
+
+    run_docker run -d \
+        -p 81:80 \
+        --volumes-from pmm-data \
+        --name pmm-server \
+  -e SERVER_USER=abc \
+  -e SERVER_PASSWORD=password \
+        --restart always \
+        percona/pmm-server:latest
+}
+
+main() {
+    install_docker
+    start_pmm
+}
+
+main
+exit 0
+```
+
+- 验证PMM Server端部署是否正常
+
+1. 查看PMM Server依赖的docker容器是否正常
+```bash
+#docker ps -a
+CONTAINER ID        IMAGE                       COMMAND                CREATED             STATUS              PORTS                         NAMES
+2af054d632ce        percona/pmm-server:latest   "/opt/entrypoint.sh"   About an hour ago   Up About an hour    443/tcp, 0.0.0.0:81->80/tcp   pmm-server
+d0a33bc33ab7        percona/pmm-server:latest   "/bin/true"            About an hour ago   Created                                           pmm-data
+#
+#docker images
+REPOSITORY                     TAG                 IMAGE ID            CREATED             SIZE
+docker.io/percona/pmm-server   latest              2ff436aaddc9        2 weeks ago         1.01 GB
+```
+2. 访问其前端Grafana页面访问是否正常
+- `http://$PMM-SERVER-IP:PORT`
+
+- 登录的需要的用户和密码就是你脚本里面设置的两个参数值
+```bash
+SERVER_USER=abc
+SERVER_PASSWORD=password
+```
+
+### PMM Client端安装部署
+- 在所有需要监控的mysql服务节点上部署
+
+- 获取PMM Client客户端软件包，并安装
+```bash
+#wget https://www.percona.com/downloads/pmm/1.17.0/binary/redhat/7/x86_64/pmm-client-1.17.0-1.el7.x86_64.rpm
+#
+# rpm -ivh pmm-client-1.17.0-1.el7.x86_64.rpm
+```
+
+- 连接PMM Client到PMM Server
+```
+#pmm-admin config --server $PMM-SERVER-IP:PORT --server-user abc --server-password password
+```
+
+- 从PMM Client端收集数据到PMM Server端
+
+*其实就是添加监控实例，我们需要监控的是mysql服务，因此我们添加每个节点的mysql实例，这里的账号和密码，是你在数据库实例中建立的账号。*{: style="color: red"}
+
+```bash
+#pmm-admin add mysql --user abc --password password
+```
+
+- 验证PMM Client连接PMM Server的信息命名汇总
+```bash
+#pmm-admin ping
+#pmm-admin info
+#pmm-admin list
+#pmm-admin check-network
+```
+
+### 登录Grafana可视化页面，验证PMM监控效果
+- `http://$PMM-SERVER-IP:PORT`
