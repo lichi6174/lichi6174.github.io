@@ -1,17 +1,19 @@
 ---
 layout: post
-title: Percona Monitoring and Management（PMM）部署
-date:  2018-11-27 16:11:00 +0900  
+title: MYSQL监控平台PMM部署
+date:  2018-12-07 15:40:00 +0900  
 description: Percona Monitoring and Management（PMM）部署
 img: post-6.jpg # Add image post (optional)
-tags: [Blog,mysql,monitor]
+tags: [Blog,DB,MySQL,monitor]
 author: Lichi # Add name author (optional)
-mysql: true
+db: true
 ---
 
-# Percona Monitoring and Management（PMM）部署
+## PMM简介 
+> Percona Monitoring and Management (PMM)是一款开源的用于管理和监控MySQL和MongoDB性能的开源平台，通过PMM客户端收集到的DB监控数据用第三方软件Grafana画图展示出来。在这个产品之前，Percona提供了Zabbix和Cacti的图形模板，也许是考虑到了用户部署起来繁琐等问题，Percona发布了PMM Docker镜像，用户只需要下载镜像运行就全部搞定，开箱即用相当easy！
 
-## 官方文档资源获取
+
+## PMM官方文档资源获取
 - `https://learn.percona.com/hubfs/Manuals/Percona_Monitoring_And_Management_PMM/PMM%201.17/Percona-Monitoring-And-Management-1.17.0.pdf`
 
 ### PMM Server端安装部署
