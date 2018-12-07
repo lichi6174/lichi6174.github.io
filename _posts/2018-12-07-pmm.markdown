@@ -14,7 +14,7 @@ db: true
 
 
 ## PMM官方文档资源获取
-- `https://learn.percona.com/hubfs/Manuals/Percona_Monitoring_And_Management_PMM/PMM%201.17/Percona-Monitoring-And-Management-1.17.0.pdf`
+> `https://learn.percona.com/hubfs/Manuals/Percona_Monitoring_And_Management_PMM/PMM%201.17/Percona-Monitoring-And-Management-1.17.0.pdf`
 
 ### PMM Server端安装部署
 
@@ -134,7 +134,7 @@ REPOSITORY                     TAG                 IMAGE ID            CREATED  
 docker.io/percona/pmm-server   latest              2ff436aaddc9        2 weeks ago         1.01 GB
 ```
 2. 访问其前端Grafana页面访问是否正常
-- `http://$PMM-SERVER-IP:PORT`
+> `http://$PMM-SERVER-IP:PORT`
 
 - 登录的需要的用户和密码就是你脚本里面设置的两个参数值
 ```bash
@@ -174,4 +174,4 @@ SERVER_PASSWORD=password
 ```
 
 ### 登录Grafana可视化页面，验证PMM监控效果
-- `http://$PMM-SERVER-IP:PORT`
+> `http://$PMM-SERVER-IP:PORT`
