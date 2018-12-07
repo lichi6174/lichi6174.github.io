@@ -14,7 +14,7 @@ db: true
 
 
 ## PMM官方文档资源获取
-> `https://learn.percona.com/hubfs/Manuals/Percona_Monitoring_And_Management_PMM/PMM%201.17/Percona-Monitoring-And-Management-1.17.0.pdf`
+> https://learn.percona.com/hubfs/Manuals/Percona_Monitoring_And_Management_PMM/PMM%201.17/Percona-Monitoring-And-Management-1.17.0.pdf
 
 ### PMM Server端安装部署
 
@@ -30,7 +30,7 @@ db: true
 ```
 
 - 根据需要,调整脚本参数，比如监听服务的监听端口以及开启Grafana的登录验证功能等，脚本参考如下：
-```bash
+```txt
 #!/bin/sh
 
 set -o errexit
@@ -134,7 +134,7 @@ REPOSITORY                     TAG                 IMAGE ID            CREATED  
 docker.io/percona/pmm-server   latest              2ff436aaddc9        2 weeks ago         1.01 GB
 ```
 2. 访问其前端Grafana页面访问是否正常
-> `http://$PMM-SERVER-IP:PORT`
+> http://$PMM-SERVER-IP:PORT
 
 - 登录的需要的用户和密码就是你脚本里面设置的两个参数值
 ```bash
@@ -158,12 +158,11 @@ SERVER_PASSWORD=password
 ```
 
 - 从PMM Client端收集数据到PMM Server端
-
-*其实就是添加监控实例，我们需要监控的是mysql服务，因此我们添加每个节点的mysql实例，这里的账号和密码，是你在数据库实例中建立的账号。*{: style="color: red"}
-
 ```bash
 #pmm-admin add mysql --user abc --password password
 ```
+
+> *其实就是添加监控实例，我们需要监控的是mysql服务，因此我们添加每个节点的mysql实例，这里的账号和密码，是你在数据库实例中建立的账号。*{: style="color: red"}
 
 - 验证PMM Client连接PMM Server的信息命名汇总
 ```bash
@@ -174,4 +173,4 @@ SERVER_PASSWORD=password
 ```
 
 ### 登录Grafana可视化页面，验证PMM监控效果
-> `http://$PMM-SERVER-IP:PORT`
+> http://$PMM-SERVER-IP:PORT
